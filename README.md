@@ -6,10 +6,10 @@ Trabalho Final Módulo 2 - Pós Graduação em Engenharia de Software - UDESC
 
 ## Participantes
 
-* Ademar Perfoll Junior
-* Carlos Antonio da Silva (@carlosantoniodasilva)
-* Fabrício Reif
-* Professor: Nilson Modro (@nilsonmodro)
+* Ademar Perfoll Junior ([@juniorperfoll](https://github.com/juniorperfoll))
+* Carlos Antonio da Silva ([@carlosantoniodasilva](https://github.com/carlosantoniodasilva))
+* Fabrício Reif ([@fabricioreif](https://github.com/fabricioreif))
+* Professor: Nilson Modro ([@nilsonmodro](https://github.com/nilsonmodro))
 
 ## License
 
