@@ -7,3 +7,8 @@
 body {
   padding-top: 50px;
 }
+
+.sessions .container {
+  margin: 0 auto;
+  max-width: 350px;
+}
