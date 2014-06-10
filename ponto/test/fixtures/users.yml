@@ -1,0 +1,11 @@
+ademar:
+  email: 'ademar@example.com'
+  encrypted_password: '<%= Devise.bcrypt(User, '12345678') %>'
+
+carlos:
+  email: 'carlos@example.com'
+  encrypted_password: '<%= Devise.bcrypt(User, '87654321') %>'
+
+fabricio:
+  email: 'fabricio@example.com'
+  encrypted_password: '<%= Devise.bcrypt(User, 'abcdefgh') %>'
