@@ -9,6 +9,8 @@ pt-BR:
       employee: Funcionário
       user: Usuário
     attributes:
+      department:
+        leader_id: Líder
       employee:
         department_id: Departamento
       user:

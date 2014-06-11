@@ -8,6 +8,7 @@
     <tr>
       <th class="table-id"><%= human_name Department, :id %></th>
       <th><%= human_name Department, :name %></th>
+      <th><%= human_name Department, :leader_id %></th>
       <th class="table-actions"></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
     <%= content_tag_for :tr, @departments do |department| %>
       <td class="table-id"><%= department.id %></td>
       <td><%= department.name %></td>
+      <td><%= link_to(department.leader.name, department.leader) if department.leader %></td>
       <td class="table-actions">
         <%= link_to icon_tag('asterisk'), department, title: 'Ver' %>
         <%= link_to icon_tag('pencil'), edit_department_path(department), title: 'Editar' %>

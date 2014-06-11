@@ -2,6 +2,10 @@ ademar:
   name: Ademar
   department: financial
 
+carlos:
+  name: Carlos
+  department: financial
+
 nilson:
   name: Nilson
   department: accounting

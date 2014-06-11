@@ -2,7 +2,7 @@ class DepartmentsController < ApplicationController
   before_action :set_department, only: [:show, :edit, :update, :destroy]
 
   def index
-    @departments = Department.order(:name)
+    @departments = Department.includes(:leader).order(:name)
   end
 
   def show
@@ -47,6 +47,6 @@ class DepartmentsController < ApplicationController
     end
 
     def department_params
-      params.require(:department).permit(:name)
+      params.require(:department).permit(:name, :leader_id)
     end
 end

@@ -17,7 +17,7 @@
     <%= content_tag_for :tr, @employees do |employee| %>
       <td class="table-id"><%= employee.id %></td>
       <td><%= employee.name %></td>
-      <td><%= employee.department.name %></td>
+      <td><%= link_to employee.department.name, employee.department %></td>
       <td class="table-actions">
         <%= link_to icon_tag('asterisk'), employee, title: 'Ver' %>
         <%= link_to icon_tag('pencil'), edit_employee_path(employee), title: 'Editar' %>

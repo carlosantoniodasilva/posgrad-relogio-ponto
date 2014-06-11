@@ -9,10 +9,12 @@ class DepartmentsTest < ActionDispatch::IntegrationTest
     visit departments_path
     click_on 'Novo Departamento'
     fill_in 'Nome', with: 'Almoxarifado'
+    select 'Nilson', from: 'Líder'
     click_on 'Criar Departamento'
 
     assert_flash 'Departamento criado com sucesso.'
     assert_content 'Almoxarifado'
+    assert_content 'Nilson'
     assert_current_path department_path(Department.last)
   end
 
@@ -36,8 +38,10 @@ class DepartmentsTest < ActionDispatch::IntegrationTest
     assert_current_path department_path(departments(:financial).reload)
   end
 
-  test 'removing a department' do
-    Employee.delete_all # Cannot delete with associated employees
+  test 'removing a department that has no associated employees' do
+    # Cannot delete with associated employees
+    Department.update_all leader_id: nil
+    Employee.delete_all
 
     visit departments_path
     assert_content 'Financeiro'

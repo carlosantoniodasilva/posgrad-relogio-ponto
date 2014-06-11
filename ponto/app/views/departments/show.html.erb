@@ -1,4 +1,5 @@
 <% content_for :title, display_id_name(@department) -%>
+<% content_for :subtitle, 'Líder: ' << display_id_name(@department.leader) if @department.leader -%>
 <% content_for :actions do -%>
   <div class="btn-group">
     <%= icon_button_to 'pencil', 'Editar', edit_department_path(@department) %>
