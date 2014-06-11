@@ -11,6 +11,16 @@ module ApplicationHelper
     content_tag :span, nil, class: "glyphicon glyphicon-#{type}"
   end
 
+  def icon_button_to(*args)
+    options = args.extract_options!
+    options[:class] = "btn btn-default #{options[:class]}".rstrip
+    icon_link_to(*(args << options))
+  end
+
+  def icon_link_to(icon_type, text, *args)
+    link_to icon_tag(icon_type) << " " << text, *args
+  end
+
   def human_name(object, attribute)
     klass = object.respond_to?(:human_attribute_name) ? object : object.class
     klass.human_attribute_name(attribute)

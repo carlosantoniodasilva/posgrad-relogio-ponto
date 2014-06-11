@@ -19,6 +19,16 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal '<span class="glyphicon glyphicon-zomg"></span>', icon_tag('zomg')
   end
 
+  test 'icon_button_to' do
+    assert_equal '<a class="btn btn-default" href="/"><span class="glyphicon glyphicon-zomg"></span> Link</a>',
+      icon_button_to('zomg', 'Link', '/')
+  end
+
+  test 'icon_link_to' do
+    assert_equal '<a href="/"><span class="glyphicon glyphicon-zomg"></span> Link</a>',
+      icon_link_to('zomg', 'Link', '/')
+  end
+
   test 'nav_item' do
     assert_equal '<li><a href="/">Lol</a></li>', nav_item('Lol', controller: 'dashboard')
 

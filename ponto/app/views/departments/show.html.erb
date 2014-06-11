@@ -1,8 +1,8 @@
 <% content_for :title, "#{@department.id} - #{@department.name}" -%>
 <% content_for :actions do -%>
   <div class="btn-group">
-    <%= link_to icon_tag('pencil') << ' Editar', edit_department_path(@department), class: 'btn btn-default' %>
-    <%= link_to icon_tag('trash') << ' Remover', @department, class: 'btn btn-default', method: :delete, data: { confirm: 'Tem certeza?' } %>
-    <%= link_to icon_tag('chevron-left') << ' Voltar', departments_path, class: 'btn btn-default' %>
+    <%= icon_button_to 'pencil', 'Editar', edit_department_path(@department) %>
+    <%= icon_button_to 'trash', 'Remover', @department, method: :delete, data: { confirm: 'Tem certeza?' } %>
+    <%= icon_button_to 'chevron-left', 'Voltar', departments_path %>
   </div>
 <% end %>

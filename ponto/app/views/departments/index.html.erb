@@ -1,6 +1,6 @@
 <% content_for :title, 'Departamentos' -%>
 <% content_for :actions do -%>
-  <%= link_to icon_tag('plus-sign') << ' Novo Departamento', new_department_path, class: 'btn btn-default pull-right' %>
+  <%= icon_link_to 'plus-sign', 'Novo Departamento', new_department_path, class: 'btn btn-default pull-right' %>
 <% end %>
 
 <table class="table table-striped">
