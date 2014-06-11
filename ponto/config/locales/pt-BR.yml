@@ -1,8 +1,12 @@
 pt-BR:
+  attributes:
+    id: Código
+    name: Nome
   activerecord:
     models:
+      department: Departamento
       user: Usuário
     attributes:
       user:
-        email: 'Email'
-        password: 'Senha'
+        email: Email
+        password: Senha

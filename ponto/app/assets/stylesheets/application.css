@@ -12,3 +12,13 @@ body {
   margin: 0 auto;
   max-width: 350px;
 }
+
+.table-actions {
+  width: 60px;
+  white-space: nowrap;
+}
+
+.table-id {
+  width: 80px;
+  white-space: nowrap;
+}

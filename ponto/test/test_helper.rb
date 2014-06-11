@@ -11,6 +11,12 @@ require 'capybara/rails'
 require 'support/integration'
 require 'warden/test/helpers'
 
+# Enables using finders with AR objects.
+Capybara.add_selector :record do
+  match { |record| record.is_a?(ActiveRecord::Base) }
+  xpath { |record| XPath.css("#" + ActionView::RecordIdentifier.dom_id(record)) }
+end
+
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
   include Support::Integration

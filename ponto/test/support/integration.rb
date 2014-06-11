@@ -1,5 +1,12 @@
 module Support
   module Integration
+    def assert_errors(*errors)
+      assert_css '#error_explanation', text: /Não foi possível salvar/
+      errors.each do |error|
+        assert_content error
+      end
+    end
+
     def assert_content(content)
       assert has_content?(content), "Expected to have content #{content}"
     end
@@ -18,6 +25,14 @@ module Support
 
     def assert_current_path(expected_path)
       assert_equal expected_path, current_path
+    end
+
+    def assert_field(field, options = nil)
+      assert has_field?(field, options), "Expected to have field #{field}#{" with options #{options.inspect}" if options}"
+    end
+
+    def assert_no_field(field, options = nil)
+      assert has_no_field?(field, options), "Expected to not have field #{field}#{" with options #{options.inspect}" if options}"
     end
 
     def assert_flash(message)

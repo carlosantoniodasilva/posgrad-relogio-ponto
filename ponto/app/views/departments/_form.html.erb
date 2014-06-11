@@ -1,0 +1,11 @@
+<%= form_for(@department) do |f| %>
+  <%= render 'shared/form_errors', object: @department %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <%= f.submit class: 'btn btn-primary', data: { disable_with: 'Enviando...' } %>
+  <%= link_to 'Cancelar', departments_path, class: 'btn btn-default' %>
+<% end %>

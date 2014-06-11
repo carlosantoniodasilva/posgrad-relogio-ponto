@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= app_title %></title>
+    <title><%= [yield(:title).presence, app_title].compact.join(' - ') %></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -15,12 +15,18 @@
     <%= render 'layouts/navigation' if user_signed_in? %>
 
     <div class="container">
-      <div class="page-header">
-        <h1><%= yield :title %></h1>
-      </div>
       <%= content_tag :div, notice, class: 'alert alert-success' if notice %>
       <%= content_tag :div, alert, class: 'alert alert-warning' if alert %>
+
+      <div class="page-header">
+        <% if content_for?(:actions) %>
+          <div class="pull-right"><%= yield :actions %></div>
+        <% end %>
+        <h1><%= yield :title %></h1>
+      </div>
+
       <%= yield %>
+
       <hr>
       <footer>
         <p>&copy; <%= app_title %> <%= Date.current.year %></p>
