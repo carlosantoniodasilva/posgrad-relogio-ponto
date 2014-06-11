@@ -10,6 +10,11 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal 'ZOMG', human_name(klass.new, 'zomg')
   end
 
+  test 'display_id_name' do
+    object = Struct.new(:id, :name).new('99', 'Teste')
+    assert_equal '99 - Teste', display_id_name(object)
+  end
+
   test 'flash_tag' do
     assert_equal '<div class="alert alert-success"><span class="glyphicon glyphicon-yay"></span> Message</div>',
       flash_tag('Message', 'yay', 'success')

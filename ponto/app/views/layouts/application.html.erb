@@ -19,7 +19,12 @@
         <% if content_for?(:actions) %>
           <div class="pull-right"><%= yield :actions %></div>
         <% end %>
-        <h1><%= yield :title %></h1>
+        <h1>
+          <%= yield :title %>
+          <% if content_for?(:subtitle) %>
+            <%= content_tag :small, yield(:subtitle) %>
+          <% end %>
+        </h1>
       </div>
 
       <%= flash_tag notice, 'ok-circle', 'success' if notice %>

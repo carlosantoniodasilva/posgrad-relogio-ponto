@@ -2,11 +2,15 @@ pt-BR:
   attributes:
     id: Código
     name: Nome
+    employees: Funcionários
   activerecord:
     models:
       department: Departamento
+      employee: Funcionário
       user: Usuário
     attributes:
+      employee:
+        department_id: Departamento
       user:
         email: Email
         password: Senha

@@ -3,6 +3,10 @@ module ApplicationHelper
     'Udesc Ponto'
   end
 
+  def display_id_name(record)
+    "#{record.id} - #{record.name}"
+  end
+
   def flash_tag(message, icon_type, alert_type)
     content_tag :div, icon_tag(icon_type) << " " << message, class: "alert alert-#{alert_type}"
   end

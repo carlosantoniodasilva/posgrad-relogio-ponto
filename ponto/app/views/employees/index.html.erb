@@ -1,0 +1,28 @@
+<% content_for :title, 'Funcionários' -%>
+<% content_for :actions do -%>
+  <%= icon_link_to 'plus-sign', 'Novo Funcionário', new_employee_path, class: 'btn btn-default pull-right' %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class="table-id"><%= human_name Employee, :id %></th>
+      <th><%= human_name Employee, :name %></th>
+      <th><%= human_name Employee, :department_id %></th>
+      <th class="table-actions"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= content_tag_for :tr, @employees do |employee| %>
+      <td class="table-id"><%= employee.id %></td>
+      <td><%= employee.name %></td>
+      <td><%= employee.department.name %></td>
+      <td class="table-actions">
+        <%= link_to icon_tag('asterisk'), employee, title: 'Ver' %>
+        <%= link_to icon_tag('pencil'), edit_employee_path(employee), title: 'Editar' %>
+        <%= link_to icon_tag('trash'), employee, title: 'Remover', method: :delete, data: { confirm: 'Tem certeza?' } %>
+      </td>
+    <% end %>
+  </tbody>
+</table>

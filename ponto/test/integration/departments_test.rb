@@ -37,6 +37,8 @@ class DepartmentsTest < ActionDispatch::IntegrationTest
   end
 
   test 'removing a department' do
+    Employee.delete_all # Cannot delete with associated employees
+
     visit departments_path
     assert_content 'Financeiro'
 
@@ -44,6 +46,18 @@ class DepartmentsTest < ActionDispatch::IntegrationTest
 
     assert_flash 'Departamento removido com sucesso.'
     assert_no_content 'Financeiro'
+    assert_current_path departments_path
+  end
+
+  test 'removing a department that contains employees' do
+    visit departments_path
+    assert_content 'Financeiro'
+
+    within(departments(:financial)) { click_on 'Remover' }
+
+    assert_flash 'Departamento não pode ser removido: Não é possível excluir o ' \
+      'registro pois existem funcionários dependentes.'
+    assert_content 'Financeiro'
     assert_current_path departments_path
   end
 end

@@ -34,8 +34,11 @@ class DepartmentsController < ApplicationController
   end
 
   def destroy
-    @department.destroy
-    redirect_to departments_url, notice: 'Departamento removido com sucesso.'
+    if @department.destroy
+      redirect_to departments_path, notice: 'Departamento removido com sucesso.'
+    else
+      redirect_to :back, alert: "Departamento não pode ser removido: #{@department.errors.full_messages.to_sentence}."
+    end
   end
 
   private

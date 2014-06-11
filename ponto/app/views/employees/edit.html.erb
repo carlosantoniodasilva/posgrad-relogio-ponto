@@ -1,0 +1,10 @@
+<% content_for :title, 'Alterar Funcionário' -%>
+<% content_for :actions do -%>
+  <div class="btn-group">
+    <%= icon_button_to 'asterisk', 'Ver', @employee %>
+    <%= icon_button_to 'trash', 'Remover', @employee, method: :delete, data: { confirm: 'Tem certeza?' } %>
+    <%= icon_button_to 'chevron-left', 'Voltar', employees_path %>
+  </div>
+<% end %>
+
+<%= render 'form' %>

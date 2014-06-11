@@ -1,0 +1,9 @@
+<% content_for :title, display_id_name(@employee) -%>
+<% content_for :subtitle, "Departamento: " << display_id_name(@employee.department) -%>
+<% content_for :actions do -%>
+  <div class="btn-group">
+    <%= icon_button_to 'pencil', 'Editar', edit_employee_path(@employee) %>
+    <%= icon_button_to 'trash', 'Remover', @employee, method: :delete, data: { confirm: 'Tem certeza?' } %>
+    <%= icon_button_to 'chevron-left', 'Voltar', employees_path %>
+  </div>
+<% end %>
