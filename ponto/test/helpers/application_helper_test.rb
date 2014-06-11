@@ -10,6 +10,11 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal 'ZOMG', human_name(klass.new, 'zomg')
   end
 
+  test 'flash_tag' do
+    assert_equal '<div class="alert alert-success"><span class="glyphicon glyphicon-yay"></span> Message</div>',
+      flash_tag('Message', 'yay', 'success')
+  end
+
   test 'icon_tag' do
     assert_equal '<span class="glyphicon glyphicon-zomg"></span>', icon_tag('zomg')
   end

@@ -3,6 +3,10 @@ module ApplicationHelper
     'Udesc Ponto'
   end
 
+  def flash_tag(message, icon_type, alert_type)
+    content_tag :div, icon_tag(icon_type) << " " << message, class: "alert alert-#{alert_type}"
+  end
+
   def icon_tag(type)
     content_tag :span, nil, class: "glyphicon glyphicon-#{type}"
   end

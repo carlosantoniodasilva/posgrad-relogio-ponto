@@ -15,15 +15,15 @@
     <%= render 'layouts/navigation' if user_signed_in? %>
 
     <div class="container">
-      <%= content_tag :div, notice, class: 'alert alert-success' if notice %>
-      <%= content_tag :div, alert, class: 'alert alert-warning' if alert %>
-
       <div class="page-header">
         <% if content_for?(:actions) %>
           <div class="pull-right"><%= yield :actions %></div>
         <% end %>
         <h1><%= yield :title %></h1>
       </div>
+
+      <%= flash_tag notice, 'ok-circle', 'success' if notice %>
+      <%= flash_tag alert, 'warning-sign', 'warning' if alert %>
 
       <%= yield %>
 

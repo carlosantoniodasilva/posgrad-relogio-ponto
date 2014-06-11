@@ -15,8 +15,8 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li class="navbar-text"><%= current_user.email %></li>
-        <li><%= link_to 'Sair', destroy_user_session_path, method: :delete %></li>
+        <li class="navbar-text"><%= icon_tag 'user' %> <%= current_user.email %></li>
+        <li><%= link_to icon_tag('log-out') << ' Sair', destroy_user_session_path, method: :delete %></li>
       </ul>
     </div>
   </div>

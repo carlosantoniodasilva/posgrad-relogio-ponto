@@ -1,9 +1,9 @@
 <% content_for :title, 'Alterar departamento' -%>
 <% content_for :actions do -%>
   <div class="btn-group">
-    <%= link_to 'Ver', @department, class: 'btn btn-default' %>
-    <%= link_to 'Remover', @department, class: 'btn btn-default', method: :delete, data: { confirm: 'Tem certeza?' } %>
-    <%= link_to 'Voltar', departments_path, class: 'btn btn-default pull-right' %>
+    <%= link_to icon_tag('asterisk') << ' Ver', @department, class: 'btn btn-default' %>
+    <%= link_to icon_tag('trash') << ' Remover', @department, class: 'btn btn-default', method: :delete, data: { confirm: 'Tem certeza?' } %>
+    <%= link_to icon_tag('chevron-left') << ' Voltar', departments_path, class: 'btn btn-default' %>
   </div>
 <% end %>
 
