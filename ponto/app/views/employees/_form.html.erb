@@ -22,6 +22,14 @@
         <% end %>
         Dados de Usuário
       </legend>
+
+      <div class="form-group">
+        <%= uf.label :role %>
+        <%= uf.collection_radio_buttons :role, [%w(admin Admin), %w(hr RH), %w(leader Líder)], :first, :last do |b| %>
+          <%= b.label(class: 'radio-inline') { b.radio_button + b.text } %>
+        <% end %>
+      </div>
+
       <div class="form-group">
         <%= uf.label :email %>
         <%= uf.email_field :email, class: 'form-control' %>

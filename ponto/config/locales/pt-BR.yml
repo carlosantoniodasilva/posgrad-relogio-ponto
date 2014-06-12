@@ -27,3 +27,4 @@ pt-BR:
         email: Email
         password: Senha
         password_confirmation: Confirmação de senha
+        role: Papel

@@ -13,6 +13,7 @@ class UsersTest < ActionDispatch::IntegrationTest
     fill_in 'Email', with: 'newuser@example.com'
     fill_in 'Senha', with: 'newuser.123'
     fill_in 'Confirmação de senha', with: 'newuser.123'
+    choose 'RH'
     click_on 'Criar Funcionário'
 
     assert_flash 'Funcionário criado com sucesso.'
@@ -41,6 +42,7 @@ class UsersTest < ActionDispatch::IntegrationTest
     fill_in 'Email', with: 'newuser@example.com'
     fill_in 'Senha', with: 'newuser.123'
     fill_in 'Confirmação de senha', with: 'newuser.123'
+    choose 'Admin'
     click_on 'Atualizar Funcionário'
 
     assert_flash 'Funcionário atualizado com sucesso.'

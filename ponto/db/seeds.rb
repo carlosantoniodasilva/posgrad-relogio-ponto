@@ -5,4 +5,5 @@ employee = Employee.find_or_create_by(name: 'Administrador') { |e|
 user = User.find_or_create_by(email: 'admin@example.com') { |u|
   u.password = u.password_confirmation = 'secret.123'
   u.employee = employee
+  u.role = 'admin'
 }
