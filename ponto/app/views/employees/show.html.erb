@@ -33,7 +33,7 @@
   <div class="alert alert-info">
     <%= pluralize @records.size, 'registro encontrado', 'registros encontrados' %> entre <%= l @from %> e <%= l @to %>.
   </div>
-  <%= render 'records/list', records: @records %>
+  <%= render 'records/list', records: @records, show_employee: false %>
 <% else %>
   <div class="alert alert-warning">
     Nenhum registro encontrado entre <%= l @from %> e <%= l @to %>.

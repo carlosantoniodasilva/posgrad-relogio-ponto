@@ -48,7 +48,7 @@ module Support
     end
 
     def assert_title(message)
-      assert_css 'h1.page-header', text: message
+      assert_css '.page-header h1', text: message
     end
   end
 end

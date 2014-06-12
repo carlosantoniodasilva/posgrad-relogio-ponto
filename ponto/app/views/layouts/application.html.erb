@@ -29,6 +29,7 @@
 
       <%= flash_tag notice, 'ok-circle', 'success' if notice %>
       <%= flash_tag alert, 'warning-sign', 'warning' if alert %>
+      <%= flash_tag error, 'remove-circle', 'danger' if error %>
 
       <%= yield %>
 

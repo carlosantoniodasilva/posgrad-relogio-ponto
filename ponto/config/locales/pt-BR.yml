@@ -2,7 +2,7 @@ pt-BR:
   time:
     formats:
       default: '%H:%M:%S'
-
+      short: '%d/%m, %H:%M'
   attributes:
     id: Código
     name: Nome
@@ -20,6 +20,7 @@ pt-BR:
         department_id: Departamento
         user: Usuário
       record:
+        employee_id: Funcionário
         date: Data
         time: Hora
       user:

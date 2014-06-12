@@ -1,15 +1,8 @@
 require 'test_helper'
+require 'support/record_importer'
 
 class RecordImporterTest < ActiveSupport::TestCase
-  class FakeConnection
-    def initialize(records)
-      @records = records
-    end
-
-    def get_records
-      @records
-    end
-  end
+  include Support::RecordImporter
 
   test 'imports all records and groups them in a single group record' do
     records = [
@@ -21,20 +14,26 @@ class RecordImporterTest < ActiveSupport::TestCase
       { 'Id' => employees(:nilson).id,   'DataRegistro' => '11/06/2014', 'HoraRegistro' => '12:02:53' },
       { 'Id' => employees(:nilson).id,   'DataRegistro' => '11/06/2014', 'HoraRegistro' => '17:05:00' }
     ]
-    importer = RecordImporter.new(FakeConnection.new(records))
 
-    assert_difference 'RecordGroup.count', 1 do
-      assert_difference 'Record.count', 7 do
-        assert_equal 7, importer.import!
+    stub_record_importer_connection records do |importer|
+      importer = RecordImporter.new
+
+      assert_difference 'RecordGroup.count', 1 do
+        assert_difference 'Record.count', 7 do
+          group = importer.import!
+          assert_equal 7, group.records.size
+        end
       end
     end
   end
 
   test 'imports nothing when there is no record available' do
-    importer = RecordImporter.new(FakeConnection.new([]))
+    stub_record_importer_connection [] do
+      importer = RecordImporter.new
 
-    assert_no_difference 'RecordGroup.count', 'Record.count' do
-      assert_equal 0, importer.import!
+      assert_no_difference 'RecordGroup.count', 'Record.count' do
+        assert_nil importer.import!
+      end
     end
   end
 
@@ -44,11 +43,14 @@ class RecordImporterTest < ActiveSupport::TestCase
       { 'Id' => employees(:nilson).id,   'DataRegistro' => '11/06/2014', 'HoraRegistro' => '07:58:43' },
       { 'Id' => 99,                      'DataRegistro' => '11/06/2014', 'HoraRegistro' => '17:05:00' }
     ]
-    importer = RecordImporter.new(FakeConnection.new(records))
 
-    assert_no_difference 'RecordGroup.count', 'Record.count' do
-      assert_raise ActiveRecord::RecordNotFound do
-        assert_equal 0, importer.import!
+    stub_record_importer_connection records do
+      importer = RecordImporter.new
+
+      assert_no_difference 'RecordGroup.count', 'Record.count' do
+        assert_raise RecordImporter::EmployeeNotFound do
+          importer.import!
+        end
       end
     end
   end

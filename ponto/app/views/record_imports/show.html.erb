@@ -1,0 +1,24 @@
+<% content_for :title, 'Importar Registros' %>
+<% content_for :subtitle do %>
+  <% if @last_group %>
+    Última atualização: <%= l @last_group.created_at, format: :short %>
+  <% else %>
+    Sem atualizações.
+  <% end %>
+<% end %>
+<% content_for :actions do %>
+  <%= icon_link_to 'refresh', 'Atualizar', record_import_path,
+    class: 'btn btn-primary', method: :post, data: { disable_with: 'Atualizando...' } %>
+<% end %>
+
+<% if @records %>
+  <div class="alert alert-info">
+    <%= pluralize @records.size, 'registro foi importado', 'registros foram importados' %> na última atualização.
+  </div>
+
+  <%= render 'records/list', records: @records, show_employee: true %>
+<% else %>
+  <div class="alert alert-warning">
+    Nenhuma atualização de registros ponto foi efetuada ainda. Utilize o botão Atualizar para buscar informações do relógio ponto.
+  </div>
+<% end %>

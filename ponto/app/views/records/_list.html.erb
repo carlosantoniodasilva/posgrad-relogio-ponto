@@ -1,6 +1,9 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <% if show_employee %>
+        <th><%= human_name Record, :employee_id %></th>
+      <% end %>
       <th><%= human_name Record, :date %></th>
       <th><%= human_name Record, :time %></th>
     </tr>
@@ -8,6 +11,9 @@
 
   <tbody>
     <%= content_tag_for :tr, records do |record| %>
+      <% if show_employee %>
+        <td><%= link_to record.employee.name, record.employee %></td>
+      <% end %>
       <td><%= l record.date %></td>
       <td><%= l record.time %></td>
     <% end %>
