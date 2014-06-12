@@ -39,6 +39,37 @@ class EmployeesTest < ActionDispatch::IntegrationTest
     assert_current_path employee_path(employees(:nilson).reload)
   end
 
+  test 'visualizing an employee with its records' do
+    travel_to Date.parse('2014-06-12') do
+      visit employee_path(employees(:ademar))
+
+      assert_content 'Ademar'
+      assert_content 'Registro Ponto'
+      assert_field 'Entre', with: '2014-06-01'
+      assert_field 'e', with: '2014-06-12'
+      assert_content '6 registros encontrados entre 01/06/2014 e 12/06/2014.'
+      assert_css '.record', count: 6
+
+      fill_in 'Entre', with: '2014-06-12'
+      fill_in 'e', with: '2014-06-12'
+      click_on 'Ver'
+
+      assert_field 'Entre', with: '2014-06-12'
+      assert_field 'e', with: '2014-06-12'
+      assert_content '2 registros encontrados entre 12/06/2014 e 12/06/2014.'
+      assert_css '.record', count: 2
+
+      fill_in 'Entre', with: '2014-06-25'
+      fill_in 'e', with: '2014-06-30'
+      click_on 'Ver'
+
+      assert_field 'Entre', with: '2014-06-25'
+      assert_field 'e', with: '2014-06-30'
+      assert_content 'Nenhum registro encontrado entre 25/06/2014 e 30/06/2014.'
+      assert_no_css '.record'
+    end
+  end
+
   test 'removing an employee' do
     visit employees_path
     assert_content 'Nilson'

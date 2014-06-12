@@ -6,6 +6,17 @@ class EmployeesController < ApplicationController
   end
 
   def show
+    record_params = params.fetch(:record) {
+      { from: Date.current.beginning_of_month, to: Date.current }
+    }
+    @from, @to = record_params[:from].presence, record_params[:to].presence
+
+    if @from && @to
+      @from = Date.parse(@from) if @from.is_a?(String)
+      @to = Date.parse(@to) if @to.is_a?(String)
+
+      @records = @employee.records.between(@from, @to).order(:date, :time)
+    end
   end
 
   def new

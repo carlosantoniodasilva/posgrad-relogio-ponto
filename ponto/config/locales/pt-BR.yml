@@ -1,4 +1,8 @@
 pt-BR:
+  time:
+    formats:
+      default: '%H:%M:%S'
+
   attributes:
     id: Código
     name: Nome
@@ -7,6 +11,7 @@ pt-BR:
     models:
       department: Departamento
       employee: Funcionário
+      record: Registro
       user: Usuário
     attributes:
       department:
@@ -14,6 +19,9 @@ pt-BR:
       employee:
         department_id: Departamento
         user: Usuário
+      record:
+        date: Data
+        time: Hora
       user:
         email: Email
         password: Senha

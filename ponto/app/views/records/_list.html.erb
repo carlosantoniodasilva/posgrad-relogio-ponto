@@ -1,0 +1,15 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= human_name Record, :date %></th>
+      <th><%= human_name Record, :time %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= content_tag_for :tr, records do |record| %>
+      <td><%= l record.date %></td>
+      <td><%= l record.time %></td>
+    <% end %>
+  </tbody>
+</table>
