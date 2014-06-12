@@ -5,7 +5,7 @@ class EmployeesTest < ActionDispatch::IntegrationTest
     login_as users(:ademar)
   end
 
-  test 'creating a employee' do
+  test 'creating an employee' do
     visit employees_path
     click_on 'Novo Funcionário'
     fill_in 'Nome', with: 'Almoxarifado'
@@ -18,17 +18,18 @@ class EmployeesTest < ActionDispatch::IntegrationTest
     assert_current_path employee_path(Employee.last)
   end
 
-  test 'attempting to create a employee with invalid fields' do
+  test 'attempting to create an employee with invalid fields' do
     visit new_employee_path
     click_on 'Criar Funcionário'
 
-    assert_errors 'não pode ficar em branco'
+    assert_errors 'Nome não pode ficar em branco'
     assert_field 'Nome', with: ''
   end
 
-  test 'editing a employee' do
+  test 'editing an employee' do
     visit employees_path
     within(employees(:nilson)) { click_on 'Editar' }
+
     fill_in 'Nome', with: 'Almoxarifado'
     click_on 'Atualizar Funcionário'
 
@@ -38,7 +39,7 @@ class EmployeesTest < ActionDispatch::IntegrationTest
     assert_current_path employee_path(employees(:nilson).reload)
   end
 
-  test 'removing a employee' do
+  test 'removing an employee' do
     visit employees_path
     assert_content 'Nilson'
 

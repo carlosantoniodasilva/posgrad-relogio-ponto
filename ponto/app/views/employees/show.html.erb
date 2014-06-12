@@ -7,3 +7,7 @@
     <%= icon_button_to 'chevron-left', 'Voltar', employees_path %>
   </div>
 <% end %>
+
+<% if @employee.user %>
+  <p class="well">Usuário: <%= mail_to @employee.user.email %></p>
+<% end %>

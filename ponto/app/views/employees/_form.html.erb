@@ -11,6 +11,39 @@
     <%= f.collection_select :department_id, Department.order(:name), :id, :name, { prompt: true }, class: 'form-control' %>
   </div>
 
+  <%= f.fields_for :user, @employee.user || @employee.build_user do |uf| %>
+    <%= field_set_tag do %>
+      <legend>
+        <% if uf.object.persisted? %>
+          <div class="pull-right">
+            <%= uf.check_box :_destroy %>
+            <%= uf.label :_destroy, 'Remover o usuário deste funcionário' %>
+          </div>
+        <% end %>
+        Dados de Usuário
+      </legend>
+      <div class="form-group">
+        <%= uf.label :email %>
+        <%= uf.email_field :email, class: 'form-control' %>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <%= uf.label :password %>
+          <%= uf.password_field :password, class: 'form-control' %>
+          <% if uf.object.persisted? %>
+            <span class="help-block">Deixe em branco caso não deseje alterar a senha.</span>
+          <% end %>
+        </div>
+
+        <div class="col-sm-6">
+          <%= uf.label :password_confirmation %>
+          <%= uf.password_field :password_confirmation, class: 'form-control' %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
   <%= f.submit class: 'btn btn-primary', data: { disable_with: 'Enviando...' } %>
   <%= link_to 'Cancelar', employees_path, class: 'btn btn-default' %>
 <% end %>

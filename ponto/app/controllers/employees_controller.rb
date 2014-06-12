@@ -2,7 +2,7 @@ class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
   def index
-    @employees = Employee.includes(:department)
+    @employees = Employee.includes(:department, :user)
   end
 
   def show
@@ -26,7 +26,12 @@ class EmployeesController < ApplicationController
   end
 
   def update
-    if @employee.update(employee_params)
+    attributes = employee_params
+    user_attributes = attributes[:user_attributes]
+    user_attributes.delete(:password) if user_attributes[:password].blank?
+    user_attributes.delete(:password_confirmation) if user_attributes[:password_confirmation].blank?
+
+    if @employee.update(attributes)
       redirect_to @employee, notice: 'Funcionário atualizado com sucesso.'
     else
       render :edit
@@ -47,6 +52,8 @@ class EmployeesController < ApplicationController
     end
 
     def employee_params
-      params.require(:employee).permit(:name, :department_id)
+      params.require(:employee).permit(
+        :name, :department_id, user_attributes: [:id, :email, :password, :password_confirmation, :_destroy]
+      )
     end
 end

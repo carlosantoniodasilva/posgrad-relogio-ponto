@@ -13,6 +13,8 @@ pt-BR:
         leader_id: Líder
       employee:
         department_id: Departamento
+        user: Usuário
       user:
         email: Email
         password: Senha
+        password_confirmation: Confirmação de senha

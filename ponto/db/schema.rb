@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611155449) do
+ActiveRecord::Schema.define(version: 20140611224253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,12 +39,16 @@ ActiveRecord::Schema.define(version: 20140611155449) do
     t.string   "encrypted_password", default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "employee_id",                     null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["employee_id"], name: "index_users_on_employee_id", using: :btree
 
   add_foreign_key "departments", "employees", name: "departments_leader_id_fk", column: "leader_id"
 
   add_foreign_key "employees", "departments", name: "employees_department_id_fk"
+
+  add_foreign_key "users", "employees", name: "users_employee_id_fk", dependent: :delete
 
 end

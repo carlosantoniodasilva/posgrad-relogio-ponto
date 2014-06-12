@@ -9,6 +9,7 @@
       <th class="table-id"><%= human_name Employee, :id %></th>
       <th><%= human_name Employee, :name %></th>
       <th><%= human_name Employee, :department_id %></th>
+      <th><%= human_name Employee, :user %></th>
       <th class="table-actions"></th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
       <td class="table-id"><%= employee.id %></td>
       <td><%= employee.name %></td>
       <td><%= link_to employee.department.name, employee.department %></td>
+      <td><%= mail_to employee.user.try :email %></td>
       <td class="table-actions">
         <%= link_to icon_tag('asterisk'), employee, title: 'Ver' %>
         <%= link_to icon_tag('pencil'), edit_employee_path(employee), title: 'Editar' %>

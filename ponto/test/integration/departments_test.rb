@@ -22,13 +22,14 @@ class DepartmentsTest < ActionDispatch::IntegrationTest
     visit new_department_path
     click_on 'Criar Departamento'
 
-    assert_errors 'não pode ficar em branco'
+    assert_errors 'Nome não pode ficar em branco'
     assert_field 'Nome', with: ''
   end
 
   test 'editing a department' do
     visit departments_path
     within(departments(:financial)) { click_on 'Editar' }
+
     fill_in 'Nome', with: 'Almoxarifado'
     click_on 'Atualizar Departamento'
 
@@ -40,16 +41,16 @@ class DepartmentsTest < ActionDispatch::IntegrationTest
 
   test 'removing a department that has no associated employees' do
     # Cannot delete with associated employees
-    Department.update_all leader_id: nil
-    Employee.delete_all
+    Department.update_all(leader_id: nil)
+    Employee.where(department_id: departments(:accounting)).delete_all
 
     visit departments_path
-    assert_content 'Financeiro'
+    assert_content 'Contábil'
 
-    within(departments(:financial)) { click_on 'Remover' }
+    within(departments(:accounting)) { click_on 'Remover' }
 
     assert_flash 'Departamento removido com sucesso.'
-    assert_no_content 'Financeiro'
+    assert_no_content 'Contábil'
     assert_current_path departments_path
   end
 

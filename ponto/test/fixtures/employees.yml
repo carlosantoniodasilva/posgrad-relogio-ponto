@@ -6,6 +6,10 @@ carlos:
   name: Carlos
   department: financial
 
+fabricio:
+  name: Fabricio
+  department: accounting
+
 nilson:
   name: Nilson
   department: accounting
