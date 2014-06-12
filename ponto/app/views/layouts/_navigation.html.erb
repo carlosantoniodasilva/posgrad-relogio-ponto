@@ -11,8 +11,8 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to 'Funcionários', employees_path %></li>
-        <li><%= link_to 'Departamentos', departments_path %></li>
+        <%= nav_item 'Funcionários', controller: 'employees' %>
+        <%= nav_item 'Departamentos', controller: 'departments' %>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
