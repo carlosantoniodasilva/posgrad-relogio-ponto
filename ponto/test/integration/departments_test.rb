@@ -39,6 +39,16 @@ class DepartmentsTest < ActionDispatch::IntegrationTest
     assert_current_path department_path(departments(:financial).reload)
   end
 
+  test 'visualizing a department with its employees' do
+    visit department_path(departments(:financial))
+
+    assert_content 'Financeiro'
+    assert_content 'Ademar'
+    assert_content 'Carlos'
+    assert_no_content 'Fabricio'
+    assert_no_content 'Nilson'
+  end
+
   test 'removing a department that has no associated employees' do
     # Cannot delete with associated employees
     Department.update_all(leader_id: nil)

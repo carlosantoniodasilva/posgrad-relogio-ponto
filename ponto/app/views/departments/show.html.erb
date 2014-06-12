@@ -7,3 +7,11 @@
     <%= icon_button_to 'chevron-left', 'Voltar', departments_path %>
   </div>
 <% end %>
+
+<% if @employees.present? %>
+  <%= render 'employees/list', employees: @department.employees.order(:name), show_department: false %>
+<% else %>
+  <div class="alert alert-info">
+    Nenhum funcionário associado a este departamento.
+  </div>
+<% end %>
