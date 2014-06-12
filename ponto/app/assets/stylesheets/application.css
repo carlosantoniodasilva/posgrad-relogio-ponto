@@ -28,3 +28,17 @@ legend label {
   font-size: 14px;
   font-weight: normal;
 }
+
+@media print {
+  body {
+    padding-top: 0;
+  }
+
+  .page-header a, .page-header form, .table-actions {
+    display: none;
+  }
+
+  a[href]:after {
+    content: "";
+  }
+}
