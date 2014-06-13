@@ -56,7 +56,7 @@ class RecordImporter
 
   def create_record(group, record_data)
     group.records.create!(
-      employee: find_employee(record_data['Id']),
+      employee: find_employee(record_data['Funcionario']['Id']),
       date: record_data['DataRegistro'],
       time: record_data['HoraRegistro']
     )

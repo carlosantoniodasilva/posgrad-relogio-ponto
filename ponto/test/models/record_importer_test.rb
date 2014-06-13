@@ -5,23 +5,23 @@ class RecordImporterTest < ActiveSupport::TestCase
   include Support::RecordImporter
 
   test 'imports all records and groups them in a single group record' do
-    records = [
-      { 'Id' => employees(:fabricio).id, 'DataRegistro' => '10/06/2014', 'HoraRegistro' => '08:05:23' },
-      { 'Id' => employees(:fabricio).id, 'DataRegistro' => '10/06/2014', 'HoraRegistro' => '12:00:04' },
-      { 'Id' => employees(:fabricio).id, 'DataRegistro' => '10/06/2014', 'HoraRegistro' => '13:05:18' },
-      { 'Id' => employees(:fabricio).id, 'DataRegistro' => '10/06/2014', 'HoraRegistro' => '16:58:02' },
-      { 'Id' => employees(:nilson).id,   'DataRegistro' => '11/06/2014', 'HoraRegistro' => '07:58:43' },
-      { 'Id' => employees(:nilson).id,   'DataRegistro' => '11/06/2014', 'HoraRegistro' => '12:02:53' },
-      { 'Id' => employees(:nilson).id,   'DataRegistro' => '11/06/2014', 'HoraRegistro' => '17:05:00' }
-    ]
-
-    stub_record_importer_connection records do |importer|
+    stub_record_importer_connection test_records do |importer|
       importer = RecordImporter.new
 
       assert_difference 'RecordGroup.count', 1 do
         assert_difference 'Record.count', 7 do
           group = importer.import!
           assert_equal 7, group.records.size
+
+          record = group.records.first
+          assert_equal employees(:fabricio), record.employee
+          assert_equal Date.new(2014, 6, 10), record.date
+          assert_equal Time.utc(2000, 1, 1, 8, 5, 23), record.time
+
+          record = group.records.last
+          assert_equal employees(:nilson), record.employee
+          assert_equal Date.new(2014, 6, 11), record.date
+          assert_equal Time.utc(2000, 1, 1, 17, 5), record.time
         end
       end
     end
@@ -38,11 +38,8 @@ class RecordImporterTest < ActiveSupport::TestCase
   end
 
   test 'raises when there is an invalid employee' do
-    records = [
-      { 'Id' => employees(:fabricio).id, 'DataRegistro' => '10/06/2014', 'HoraRegistro' => '08:05:23' },
-      { 'Id' => employees(:nilson).id,   'DataRegistro' => '11/06/2014', 'HoraRegistro' => '07:58:43' },
-      { 'Id' => 99,                      'DataRegistro' => '11/06/2014', 'HoraRegistro' => '17:05:00' }
-    ]
+    records = test_records.first(3)
+    records.last['Funcionario']['Id'] = 99
 
     stub_record_importer_connection records do
       importer = RecordImporter.new

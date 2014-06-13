@@ -10,10 +10,8 @@ class RecordImportsTest < ActionDispatch::IntegrationTest
 
   test 'importing records for the first time from the api' do
     RecordGroup.delete_all
-    records = [
-      { 'Id' => employees(:fabricio).id, 'DataRegistro' => '10/06/2014', 'HoraRegistro' => '08:05:23' },
-      { 'Id' => employees(:nilson).id,   'DataRegistro' => '11/06/2014', 'HoraRegistro' => '07:58:43' }
-    ]
+    records = test_records
+    records = [records.first, records.last]
 
     stub_record_importer_connection records do
       visit record_import_path
@@ -26,7 +24,7 @@ class RecordImportsTest < ActionDispatch::IntegrationTest
       assert_flash 'Importação de registros do ponto efetuada com sucesso.'
       assert_content '2 registros foram importados na última atualização'
       assert_content 'Fabricio 10/06/2014 08:05:23'
-      assert_content 'Nilson 11/06/2014 07:58:43'
+      assert_content 'Nilson 11/06/2014 17:05:00'
       assert_no_content 'Nenhuma atualização'
       assert_current_path record_import_path
     end
@@ -43,10 +41,8 @@ class RecordImportsTest < ActionDispatch::IntegrationTest
   end
 
   test 'importing with an invalid employee id' do
-    records = [
-      { 'Id' => employees(:fabricio).id, 'DataRegistro' => '10/06/2014', 'HoraRegistro' => '08:05:23' },
-      { 'Id' => '1',                     'DataRegistro' => '11/06/2014', 'HoraRegistro' => '07:58:43' }
-    ]
+    records = test_records.first(2)
+    records.last['Funcionario']['Id'] = 1
 
     stub_record_importer_connection records do
       visit record_import_path
