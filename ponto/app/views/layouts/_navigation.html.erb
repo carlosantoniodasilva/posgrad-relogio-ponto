@@ -11,9 +11,11 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <%= nav_item 'Importar Registros', controller: 'record_imports', action: :show %>
-        <%= nav_item 'Funcionários', controller: 'employees' %>
+        <% if current_user.admin? || current_user.hr? %>
+          <%= nav_item 'Importar Registros', controller: 'record_imports', action: :show %>
+        <% end %>
         <%= nav_item 'Departamentos', controller: 'departments' %>
+        <%= nav_item 'Funcionários', controller: 'employees' %>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

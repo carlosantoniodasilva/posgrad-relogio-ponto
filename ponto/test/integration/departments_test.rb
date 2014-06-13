@@ -45,7 +45,6 @@ class DepartmentsTest < ActionDispatch::IntegrationTest
     assert_content 'Financeiro'
     assert_content 'Ademar'
     assert_content 'Carlos'
-    assert_no_content 'Fabricio'
     assert_no_content 'Nilson'
   end
 

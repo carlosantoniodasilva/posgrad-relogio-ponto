@@ -1,4 +1,6 @@
 class RecordImportsController < ApplicationController
+  authorize_roles :admin, :hr
+
   rescue_from RecordImporter::Connection::Error do
     redirect_to record_import_path, error: 'Não foi possível comunicar-se com o relógio ponto.'
   end

@@ -1,6 +1,6 @@
 <% content_for :title, 'Funcionários' -%>
 <% content_for :actions do -%>
   <%= icon_link_to 'plus-sign', 'Novo Funcionário', new_employee_path, class: 'btn btn-default pull-right' %>
-<% end %>
+<% end unless current_user.leader? %>
 
 <%= render 'list', employees: @employees, show_department: true %>

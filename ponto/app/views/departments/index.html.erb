@@ -1,7 +1,7 @@
 <% content_for :title, 'Departamentos' -%>
 <% content_for :actions do -%>
   <%= icon_link_to 'plus-sign', 'Novo Departamento', new_department_path, class: 'btn btn-default pull-right' %>
-<% end %>
+<% end unless current_user.leader? %>
 
 <table class="table table-striped">
   <thead>
@@ -20,8 +20,10 @@
       <td><%= link_to(department.leader.name, department.leader) if department.leader %></td>
       <td class="table-actions">
         <%= link_to icon_tag('asterisk'), department, title: 'Ver' %>
-        <%= link_to icon_tag('pencil'), edit_department_path(department), title: 'Editar' %>
-        <%= link_to icon_tag('trash'), department, title: 'Remover', method: :delete, data: { confirm: 'Tem certeza?' } %>
+        <% unless current_user.leader? %>
+          <%= link_to icon_tag('pencil'), edit_department_path(department), title: 'Editar' %>
+          <%= link_to icon_tag('trash'), department, title: 'Remover', method: :delete, data: { confirm: 'Tem certeza?' } %>
+        <% end %>
       </td>
     <% end %>
   </tbody>

@@ -21,8 +21,10 @@
       <td><%= mail_to employee.user.try :email %></td>
       <td class="table-actions">
         <%= link_to icon_tag('asterisk'), employee, title: 'Ver' %>
-        <%= link_to icon_tag('pencil'), edit_employee_path(employee), title: 'Editar' %>
-        <%= link_to icon_tag('trash'), employee, title: 'Remover', method: :delete, data: { confirm: 'Tem certeza?' } %>
+        <% unless current_user.leader? %>
+          <%= link_to icon_tag('pencil'), edit_employee_path(employee), title: 'Editar' %>
+          <%= link_to icon_tag('trash'), employee, title: 'Remover', method: :delete, data: { confirm: 'Tem certeza?' } %>
+        <% end %>
       </td>
     <% end %>
   </tbody>

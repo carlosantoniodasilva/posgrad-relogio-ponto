@@ -1,8 +1,10 @@
 class EmployeesController < ApplicationController
+  authorize_roles :admin, :hr, except: [:index, :show]
+  authorize_roles :admin, :hr, :leader, only: [:index, :show]
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
   def index
-    @employees = Employee.includes(:department, :user)
+    @employees = employees_scope.includes(:department, :user)
   end
 
   def show
@@ -20,14 +22,14 @@ class EmployeesController < ApplicationController
   end
 
   def new
-    @employee = Employee.new
+    @employee = employees_scope.new
   end
 
   def edit
   end
 
   def create
-    @employee = Employee.new(employee_params)
+    @employee = employees_scope.new(employee_params)
 
     if @employee.save
       redirect_to @employee, notice: 'Funcionário criado com sucesso.'
@@ -59,12 +61,16 @@ class EmployeesController < ApplicationController
 
   private
     def set_employee
-      @employee = Employee.find(params[:id])
+      @employee = employees_scope.find(params[:id])
     end
 
     def employee_params
       params.require(:employee).permit(
         :name, :department_id, user_attributes: [:id, :email, :password, :password_confirmation, :role, :_destroy]
       )
+    end
+
+    def employees_scope
+      current_user.leader? ? current_user.led_employees : Employee
     end
 end
