@@ -16,6 +16,8 @@ module Support
       end
     end
 
+    protected
+
     def stub_record_importer_connection(records)
       swap_connection FakeConnection.new(records) do
         yield
