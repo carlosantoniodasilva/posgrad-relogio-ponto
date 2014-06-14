@@ -51,6 +51,14 @@ $ git push -f heroku `git subtree split --prefix ponto master`:master
 
 Créditos: [https://coderwall.com/p/ssxp5q](https://coderwall.com/p/ssxp5q).
 
+## Testes
+
+A suite de testes da aplicação está rodando no travis-ci, um serviço de build
+contínuo gratuito para projetos open source:
+
+[![Status do build](https://api.travis-ci.org/carlosantoniodasilva/posgrad-relogio-ponto.svg?branch=master)](https://travis-ci.org/carlosantoniodasilva/posgrad-relogio-ponto)
+
+
 ## Participantes
 
 * Ademar Perfoll Junior ([@juniorperfoll](https://github.com/juniorperfoll))

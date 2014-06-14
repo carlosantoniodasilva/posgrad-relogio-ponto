@@ -1,0 +1,11 @@
+addons:
+  postgresql: "9.3"
+gemfile: ponto/Gemfile
+language: ruby
+rvm: 2.1.2
+before_install: 'cd ponto'
+install: 'bundle install --without production --path vendor/bundle'
+before_script:
+  - "psql -c 'create database travis_ci_test;' -U postgres"
+  - 'cp config/database.yml.travis config/database.yml'
+script: 'bin/rake test:all'
