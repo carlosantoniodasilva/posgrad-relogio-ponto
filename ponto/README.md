@@ -58,6 +58,14 @@ contínuo gratuito para projetos open source:
 
 [![Status do build](https://api.travis-ci.org/carlosantoniodasilva/posgrad-relogio-ponto.svg?branch=master)](https://travis-ci.org/carlosantoniodasilva/posgrad-relogio-ponto)
 
+## Métricas de Código
+
+Algumas métricas de código são geradas a cada commit através do codeclimate, um
+serviço que avalia o código usando diversas ferramentas diferentes de métricas e
+gera uma nota geral, indicando possíveis pontos de melhorias, também gratuito
+para projetos open source:
+
+[![Code Climate](https://codeclimate.com/github/carlosantoniodasilva/posgrad-relogio-ponto.png)](https://codeclimate.com/github/carlosantoniodasilva/posgrad-relogio-ponto)
 
 ## Participantes
 
