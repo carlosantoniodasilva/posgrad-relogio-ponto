@@ -14,7 +14,7 @@ class RecordImportsTest < ActionDispatch::IntegrationTest
     records = [records.first, records.last]
 
     stub_record_importer_connection records do
-      visit record_import_path
+      visit new_record_import_path
 
       assert_title 'Importar Registros'
       assert_content 'Nenhuma atualização de registros ponto foi efetuada ainda.'
@@ -26,13 +26,13 @@ class RecordImportsTest < ActionDispatch::IntegrationTest
       assert_content 'Fabricio 10/06/2014 08:05:23'
       assert_content 'Nilson 11/06/2014 17:05:00'
       assert_no_content 'Nenhuma atualização'
-      assert_current_path record_import_path
+      assert_current_path new_record_import_path
     end
   end
 
   test 'importing when there are no records to import' do
     stub_record_importer_connection [] do
-      visit record_import_path
+      visit new_record_import_path
       click_on 'Atualizar'
 
       assert_flash 'Nenhum registro encontrado no relógio ponto.'
@@ -45,21 +45,21 @@ class RecordImportsTest < ActionDispatch::IntegrationTest
     records.last['Funcionario']['Id'] = 1
 
     stub_record_importer_connection records do
-      visit record_import_path
+      visit new_record_import_path
       click_on 'Atualizar'
 
       assert_flash 'Não foi possível importar os registros: funcionário com o código 1 não encontrado.'
-      assert_current_path record_import_path
+      assert_current_path new_record_import_path
     end
   end
 
   test 'attempt to import with a connection error' do
     stub_record_importer_connection_error do
-      visit record_import_path
+      visit new_record_import_path
       click_on 'Atualizar'
 
       assert_flash 'Não foi possível comunicar-se com o relógio ponto.'
-      assert_current_path record_import_path
+      assert_current_path new_record_import_path
     end
   end
 end

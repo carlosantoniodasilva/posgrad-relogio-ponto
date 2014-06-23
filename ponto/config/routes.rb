@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :departments, path: 'departamentos'
   resources :employees, path: 'funcionarios'
   resources :holidays, path: 'feriados', except: :show
-  resource :record_import, only: [:show, :create], path: 'importar_registros'
+  resource :record_import, only: [:new, :create], path: 'importar_registros'
 
   devise_for :users, path: 'usuarios', path_names: { sign_in: 'acessar', sign_out: 'sair' }
   root to: 'dashboard#index'
