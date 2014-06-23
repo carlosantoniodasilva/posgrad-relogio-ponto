@@ -1,0 +1,25 @@
+<% content_for :title, 'Feriados' -%>
+<% content_for :actions do -%>
+  <%= icon_link_to 'plus-sign', 'Novo Feriado', new_holiday_path, class: 'btn btn-default pull-right' %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= human_name Holiday, :date %></th>
+      <th><%= human_name Holiday, :name %></th>
+      <th class="table-actions"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= content_tag_for :tr, @holidays do |holiday| %>
+      <td><%= l holiday.date %></td>
+      <td><%= holiday.name %></td>
+      <td class="table-actions">
+        <%= link_to icon_tag('pencil'), edit_holiday_path(holiday), title: 'Editar' %>
+        <%= link_to icon_tag('trash'), holiday, title: 'Remover', method: :delete, data: { confirm: 'Tem certeza?' } %>
+      </td>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,9 @@
+<% content_for :title, 'Alterar Feriado' -%>
+<% content_for :actions do -%>
+  <div class="btn-group">
+    <%= icon_button_to 'trash', 'Remover', @holiday, method: :delete, data: { confirm: 'Tem certeza?' } %>
+    <%= icon_button_to 'chevron-left', 'Voltar', holidays_path %>
+  </div>
+<% end %>
+
+<%= render 'form' %>

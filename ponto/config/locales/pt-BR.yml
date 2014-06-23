@@ -11,6 +11,7 @@ pt-BR:
     models:
       department: Departamento
       employee: Funcionário
+      holiday: Feriado
       record: Registro
       user: Usuário
     attributes:
@@ -19,6 +20,8 @@ pt-BR:
       employee:
         department_id: Departamento
         user: Usuário
+      holiday:
+        date: Data
       record:
         employee_id: Funcionário
         date: Data

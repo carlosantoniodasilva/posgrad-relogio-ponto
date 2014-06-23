@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612185035) do
+ActiveRecord::Schema.define(version: 20140623122322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 20140612185035) do
   end
 
   add_index "employees", ["department_id"], name: "index_employees_on_department_id", using: :btree
+
+  create_table "holidays", force: true do |t|
+    t.date     "date",       null: false
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "holidays", ["date"], name: "index_holidays_on_date", unique: true, using: :btree
 
   create_table "record_groups", force: true do |t|
     t.datetime "created_at"
