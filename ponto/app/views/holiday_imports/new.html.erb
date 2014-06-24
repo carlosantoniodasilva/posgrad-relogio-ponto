@@ -1,0 +1,29 @@
+<% content_for :title, 'Importar Feriados' %>
+<% content_for :actions do %>
+  <%= icon_button_to 'chevron-left', 'Voltar', holidays_path %>
+<% end %>
+
+<% if @holidays %>
+  <div class="alert alert-info">
+    <%= pluralize @holidays.size, 'registro foi importado', 'registros foram importados' %> na última atualização.
+  </div>
+
+  <%= render 'holidays/list', holidays: @holidays, show_employee: true %>
+<% else %>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Envie o arquivo CSV para efetuar a importação de feriados.</div>
+    <div class="panel-body">
+      As linhas do arquivo devem conter o seguinte formato: <strong>dd/mm/aaaa,Nome do Feriado</strong>
+
+      <hr>
+      <%= form_for @importer, url: holiday_import_path do |f| %>
+        <div class="form-group">
+          <%= f.label :file, 'Arquivo', class: 'sr-only' %>
+          <%= f.file_field :file, class: 'form-control' %>
+        </div>
+
+        <%= f.submit 'Importar Arquivo', class: 'btn btn-primary', data: { disable_with: 'Importando...' } %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

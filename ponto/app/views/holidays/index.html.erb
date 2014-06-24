@@ -1,6 +1,9 @@
 <% content_for :title, 'Feriados' -%>
 <% content_for :actions do -%>
-  <%= icon_link_to 'plus-sign', 'Novo Feriado', new_holiday_path, class: 'btn btn-default pull-right' %>
+  <div class="btn-group">
+    <%= icon_link_to 'import', 'Importar Feriados', new_holiday_import_path, class: 'btn btn-default' %>
+    <%= icon_link_to 'plus-sign', 'Novo Feriado', new_holiday_path, class: 'btn btn-default' %>
+  </div>
 <% end %>
 
 <table class="table table-striped">

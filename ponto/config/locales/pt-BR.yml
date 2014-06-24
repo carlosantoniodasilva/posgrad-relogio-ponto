@@ -7,6 +7,10 @@ pt-BR:
     id: Código
     name: Nome
     employees: Funcionários
+  activemodel:
+    attributes:
+      holiday_importer:
+        file: Arquivo
   activerecord:
     models:
       department: Departamento
