@@ -22,6 +22,7 @@ pt-BR:
     attributes:
       department:
         leader_id: Líder
+        overtime_bank_balance: Saldo de horas
       employee:
         department_id: Departamento
         overtime_bank_balance: Saldo de horas

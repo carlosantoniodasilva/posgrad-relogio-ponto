@@ -43,6 +43,7 @@ class DepartmentsTest < ActionDispatch::IntegrationTest
     visit department_path(departments(:financial))
 
     assert_content 'Financeiro'
+    assert_content 'Saldo de horas: 1,50'
     assert_content 'Ademar'
     assert_content 'Carlos'
     assert_no_content 'Nilson'

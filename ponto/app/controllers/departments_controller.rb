@@ -1,13 +1,14 @@
 class DepartmentsController < ApplicationController
   authorize_roles :admin, :hr, except: [:index, :show]
   authorize_roles :admin, :hr, :leader, only: [:index, :show]
-  before_action :set_department, only: [:show, :edit, :update, :destroy]
+  before_action :set_department, only: [:edit, :update, :destroy]
 
   def index
-    @departments = departments_scope.includes(:leader).order(:name)
+    @departments = departments_scope.with_overtime_bank_balance.includes(:leader).order(:name)
   end
 
   def show
+    @department = departments_scope.with_overtime_bank_balance.find(params[:id])
     @employees = @department.employees.includes(:user).order(:name)
   end
 

@@ -11,6 +11,11 @@
 <% end %>
 
 <% if @employees.present? %>
+  <p class="well">
+    <strong><%= human_name Department, :overtime_bank_balance %>: </strong>
+    <%= display_balance @department.overtime_bank_balance %>
+  </p>
+
   <%= render 'employees/list', employees: @department.employees.order(:name), show_department: false %>
 <% else %>
   <div class="alert alert-info">
