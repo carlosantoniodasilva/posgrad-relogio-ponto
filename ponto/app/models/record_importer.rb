@@ -2,7 +2,6 @@ require 'json'
 require 'net/http'
 require 'uri'
 
-# TODO: Better error handling for employee not found or connection error.
 class RecordImporter
   class Connection
     ENDPOINT = 'http://cartaopontoserver.azurewebsites.net/api/registrohora'
@@ -60,7 +59,7 @@ class RecordImporter
   def create_record(group, record_data)
     group.records.create!(
       employee: find_employee(record_data['Funcionario']['Id']),
-      date: record_data['DataRegistro'],
+      date: parse_date(record_data['DataRegistro']),
       time: record_data['HoraRegistro']
     )
   end
@@ -69,11 +68,15 @@ class RecordImporter
     @employees[id] ||= Employee.find_by_id(id) || raise(EmployeeNotFound.new(id))
   end
 
+  def parse_date(date)
+    Date.strptime(date, '%m/%d/%Y')
+  end
+
   def transaction
     ActiveRecord::Base.transaction do
       begin
         yield
-      rescue ActiveRecord::RecordInvalid => e
+      rescue ArgumentError, ActiveRecord::RecordInvalid => e
         raise ParseError.new(e)
       end
     end

@@ -39,7 +39,7 @@ class HolidayImporter
   end
 
   def process_line(date, name)
-    holiday = Holiday.find_or_initialize_by(date: Date.parse(date))
+    holiday = Holiday.find_or_initialize_by(date: parse_date(date))
     update_totals(holiday)
 
     holiday.update_attributes!(name: name)
@@ -58,6 +58,10 @@ class HolidayImporter
     end
   end
 
+  def parse_date(date)
+    Date.strptime(date, '%d/%m/%Y')
+  end
+
   def update_totals(holiday)
     if holiday.persisted?
       @total_updated += 1
@@ -70,9 +74,9 @@ class HolidayImporter
     Holiday.transaction do
       begin
         yield
-      rescue ArgumentError, ActiveRecord::RecordInvalid
+      rescue ArgumentError, ActiveRecord::RecordInvalid => e
         reset_totals
-        raise ParseError
+        raise ParseError.new(e)
       end
     end
   end
