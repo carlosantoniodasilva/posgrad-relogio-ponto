@@ -51,4 +51,19 @@ class RecordImporterTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test 'raises when receiving an invalid or missing date/time' do
+    records = test_records.first(3)
+    records.last['DataRegistro'] = ''
+
+    stub_record_importer_connection records do
+      importer = RecordImporter.new
+
+      assert_no_difference 'RecordGroup.count', 'Record.count' do
+        assert_raise RecordImporter::ParseError do
+          importer.import!
+        end
+      end
+    end
+  end
 end

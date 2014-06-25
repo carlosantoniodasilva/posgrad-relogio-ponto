@@ -25,6 +25,9 @@ class RecordImporter
     end
   end
 
+  class ParseError < StandardError
+  end
+
   cattr_accessor :connection
   self.connection = Connection.new
 
@@ -36,7 +39,7 @@ class RecordImporter
     records_to_import = self.class.connection.get_records
 
     if records_to_import.any?
-      ActiveRecord::Base.transaction do
+      transaction do
         group = create_group
 
         records_to_import.each do |record_data|
@@ -64,5 +67,15 @@ class RecordImporter
 
   def find_employee(id)
     @employees[id] ||= Employee.find_by_id(id) || raise(EmployeeNotFound.new(id))
+  end
+
+  def transaction
+    ActiveRecord::Base.transaction do
+      begin
+        yield
+      rescue ActiveRecord::RecordInvalid => e
+        raise ParseError.new(e)
+      end
+    end
   end
 end
