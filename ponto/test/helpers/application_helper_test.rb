@@ -10,6 +10,12 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal 'ZOMG', human_name(klass.new, 'zomg')
   end
 
+  test 'display_balance' do
+    assert_equal '2,25', display_balance(2.25)
+    assert_equal '4,50', display_balance(4.5)
+    assert_equal '9,00', display_balance(9)
+  end
+
   test 'display_id_name' do
     object = Struct.new(:id, :name).new('99', 'Teste')
     assert_equal '99 - Teste', display_id_name(object)

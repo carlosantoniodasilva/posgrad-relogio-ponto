@@ -3,6 +3,10 @@ module ApplicationHelper
     'Udesc Ponto'
   end
 
+  def display_balance(value)
+    number_with_precision value, precision: 2
+  end
+
   def display_id_name(record)
     "#{record.id} - #{record.name}"
   end

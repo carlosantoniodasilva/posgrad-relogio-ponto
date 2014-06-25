@@ -1,6 +1,7 @@
 ademar:
   name: Ademar
   department: financial
+  overtime_bank_balance: 1.5
 
 carlos:
   name: Carlos

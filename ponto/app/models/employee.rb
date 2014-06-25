@@ -5,7 +5,7 @@ class Employee < ActiveRecord::Base
   has_many :records
   has_one :user, dependent: :destroy
 
-  validates :name, :department_id, presence: true
+  validates :name, :department_id, :overtime_bank_balance, presence: true
 
   to_param :name
 

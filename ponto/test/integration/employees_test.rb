@@ -15,6 +15,7 @@ class EmployeesTest < ActionDispatch::IntegrationTest
     assert_flash 'Funcionário criado com sucesso.'
     assert_content 'Almoxarifado'
     assert_content 'Financeiro'
+    assert_content 'Saldo de horas: 0,00'
     assert_current_path employee_path(Employee.last)
   end
 
@@ -44,6 +45,7 @@ class EmployeesTest < ActionDispatch::IntegrationTest
       visit employee_path(employees(:ademar))
 
       assert_content 'Ademar'
+      assert_content 'Saldo de horas: 1,50'
       assert_content 'Registro Ponto'
       assert_field 'Entre', with: '2014-06-01'
       assert_field 'e', with: '2014-06-12'

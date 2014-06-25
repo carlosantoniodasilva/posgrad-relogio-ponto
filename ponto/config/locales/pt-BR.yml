@@ -2,6 +2,7 @@ pt-BR:
   time:
     formats:
       default: '%H:%M:%S'
+      hours: '%H:%M'
       short: '%d/%m, %H:%M'
   attributes:
     id: Código
@@ -23,6 +24,7 @@ pt-BR:
         leader_id: Líder
       employee:
         department_id: Departamento
+        overtime_bank_balance: Saldo de horas
         user: Usuário
       holiday:
         date: Data

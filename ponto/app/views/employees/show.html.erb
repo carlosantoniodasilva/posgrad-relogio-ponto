@@ -10,9 +10,17 @@
   </div>
 <% end %>
 
-<% if @employee.user %>
-  <p class="well">Usuário: <%= mail_to @employee.user.email %></p>
-<% end %>
+<p class="well">
+  <% if @employee.user %>
+    <span class="pull-right">
+      <strong><%= human_name Employee, :user %>:</strong>
+      <%= mail_to @employee.user.email %>
+    </span>
+  <% end %>
+
+  <strong><%= human_name Employee, :overtime_bank_balance %>: </strong>
+  <%= display_balance @employee.overtime_bank_balance %>
+</p>
 
 <div class="page-header">
   <div class="pull-right">

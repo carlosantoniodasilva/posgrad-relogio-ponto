@@ -6,6 +6,7 @@
       <% if show_department %>
         <th><%= human_name Employee, :department_id %></th>
       <% end %>
+      <th><%= human_name Employee, :overtime_bank_balance %></th>
       <th><%= human_name Employee, :user %></th>
       <th class="table-actions"></th>
     </tr>
@@ -18,6 +19,7 @@
       <% if show_department %>
         <td><%= link_to employee.department.name, employee.department %></td>
       <% end %>
+      <td><%= display_balance employee.overtime_bank_balance %></td>
       <td><%= mail_to employee.user.try :email %></td>
       <td class="table-actions">
         <%= link_to icon_tag('asterisk'), employee, title: 'Ver' %>
