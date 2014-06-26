@@ -7,8 +7,6 @@ class CreateRecordInconsistencies < ActiveRecord::Migration
       t.integer :kind, null: false
       t.integer :status, null: false
       t.string :notes
-
-      t.timestamps
     end
   end
 end

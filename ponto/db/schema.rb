@@ -59,12 +59,10 @@ ActiveRecord::Schema.define(version: 20140626124304) do
   end
 
   create_table "record_inconsistencies", force: true do |t|
-    t.integer  "record_id",  null: false
-    t.integer  "kind",       null: false
-    t.integer  "status",     null: false
-    t.string   "notes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "record_id", null: false
+    t.integer "kind",      null: false
+    t.integer "status",    null: false
+    t.string  "notes"
   end
 
   add_index "record_inconsistencies", ["record_id"], name: "index_record_inconsistencies_on_record_id", using: :btree
