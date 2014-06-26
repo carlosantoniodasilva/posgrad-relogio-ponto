@@ -12,7 +12,7 @@ class OvertimeBankPaymentsController < ApplicationController
   def create
     @overtime_bank_payment = OvertimeBankPayment.new(overtime_bank_payment_params)
 
-    if @overtime_bank_payment.save
+    if @overtime_bank_payment.save_updating_employee_balance
       redirect_to overtime_bank_payments_path, notice: 'Pagamento de Horas criado com sucesso.'
     else
       render :new
@@ -21,7 +21,7 @@ class OvertimeBankPaymentsController < ApplicationController
 
   def destroy
     @overtime_bank_payment = OvertimeBankPayment.find(params[:id])
-    @overtime_bank_payment.destroy
+    @overtime_bank_payment.destroy_updating_employee_balance
     redirect_to overtime_bank_payments_path, notice: 'Pagamento de Horas removido com sucesso.'
   end
 

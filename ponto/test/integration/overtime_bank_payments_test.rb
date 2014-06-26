@@ -17,9 +17,9 @@ class OvertimeBankPaymentsTest < ActionDispatch::IntegrationTest
     assert_content 'Ademar 1,25'
     assert_current_path overtime_bank_payments_path
 
-    # visit employee_path(employees(:ademar))
+    visit employee_path(employees(:ademar))
 
-    # assert_content 'Saldo de Horas: 0,25'
+    assert_content 'Saldo de horas: 0,25'
   end
 
   test 'attempting to create an overtime_bank_payment with invalid fields' do
@@ -39,8 +39,8 @@ class OvertimeBankPaymentsTest < ActionDispatch::IntegrationTest
     assert_no_content 'Fabricio'
     assert_current_path overtime_bank_payments_path
 
-    # visit employee_path(employees(:fabricio))
+    visit employee_path(employees(:fabricio))
 
-    # assert_content 'Saldo de Horas: 18,75'
+    assert_content 'Saldo de horas: 18,75'
   end
 end
