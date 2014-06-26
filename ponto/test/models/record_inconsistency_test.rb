@@ -12,26 +12,18 @@ class RecordInconsistencyTest < ActiveSupport::TestCase
     inconsistency.valid?
     assert_not_empty inconsistency.errors[:kind]
 
-    inconsistency.kind = 'invalid'
-    inconsistency.valid?
-    assert_not_empty inconsistency.errors[:kind]
-
-    inconsistency.kind = 'feriado'
+    inconsistency.kind = 'weekend'
     inconsistency.valid?
     assert_empty inconsistency.errors[:kind]
   end
 
   test 'status must be valid' do
-    inconsistency = RecordInconsistency.new(kind: nil)
+    inconsistency = RecordInconsistency.new(status: nil)
     inconsistency.valid?
-    assert_not_empty inconsistency.errors[:kind]
+    assert_not_empty inconsistency.errors[:status]
 
-    inconsistency.kind = 'invalid'
+    inconsistency.status = 'granted'
     inconsistency.valid?
-    assert_not_empty inconsistency.errors[:kind]
-
-    inconsistency.kind = 'feriado'
-    inconsistency.valid?
-    assert_empty inconsistency.errors[:kind]
+    assert_empty inconsistency.errors[:status]
   end
 end

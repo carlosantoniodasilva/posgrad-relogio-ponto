@@ -1,9 +1,10 @@
 class RecordInconsistency < ActiveRecord::Base
-  KINDS = %w(falta mais_registros menos_registros final_semana feriado)
-  STATUSES = %w(pendente abonado verificado)
   belongs_to :record
 
+  enum kind: %i[missing above_limit below_limit weekend holiday]
+  enum status: %i[pending granted verified]
+
   validates :record_id, presence: true
-  validates :kind, presence: true, inclusion: { in: KINDS, allow_blank: true }
-  validates :status, presence: true, inclusion: { in: STATUSES, allow_blank: true }
+  validates :kind, presence: true, inclusion: { in: kinds.keys, allow_blank: true }
+  validates :status, presence: true, inclusion: { in: statuses.keys, allow_blank: true }
 end

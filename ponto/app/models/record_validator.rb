@@ -16,18 +16,18 @@ class RecordValidator
   private
 
   def create_inconsistency(record, kind)
-    record.create_inconsistency!(kind: kind, status: 'pendente')
+    record.create_inconsistency!(kind: kind, status: :pending)
   end
 
   def validate_record(record)
     if above_limit?(record.times)
-      create_inconsistency record, 'mais_registros'
+      create_inconsistency record, :above_limit
     elsif below_limit?(record.times)
-      create_inconsistency record, 'menos_registros'
+      create_inconsistency record, :below_limit
     elsif weekend?(record.date)
-      create_inconsistency record, 'final_semana'
+      create_inconsistency record, :weekend
     elsif holiday?(record.date)
-      create_inconsistency record, 'feriado'
+      create_inconsistency record, :holiday
     end
   end
 

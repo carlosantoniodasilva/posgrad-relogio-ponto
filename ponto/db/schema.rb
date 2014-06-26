@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626115923) do
+ActiveRecord::Schema.define(version: 20140626124304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 20140626115923) do
 
   create_table "record_inconsistencies", force: true do |t|
     t.integer  "record_id",  null: false
-    t.string   "kind",       null: false
-    t.string   "status",     null: false
+    t.integer  "kind",       null: false
+    t.integer  "status",     null: false
     t.string   "notes"
     t.datetime "created_at"
     t.datetime "updated_at"

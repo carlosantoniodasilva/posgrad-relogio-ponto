@@ -4,8 +4,8 @@ class CreateRecordInconsistencies < ActiveRecord::Migration
       t.references :record, index: true, null: false
       t.foreign_key :records, dependent: :delete
 
-      t.string :kind, null: false
-      t.string :status, null: false
+      t.integer :kind, null: false
+      t.integer :status, null: false
       t.string :notes
 
       t.timestamps

@@ -29,8 +29,8 @@ class RecordValidatorTest < ActiveSupport::TestCase
       validator.validate!
     end
 
-    assert_equal 'menos_registros', @record.inconsistency.kind
-    assert_equal 'pendente', @record.inconsistency.status
+    assert_equal 'below_limit', @record.inconsistency.kind
+    assert_equal 'pending', @record.inconsistency.status
   end
 
   test 'generates an inconsistency for more than 4 records in the day' do
@@ -41,8 +41,8 @@ class RecordValidatorTest < ActiveSupport::TestCase
       validator.validate!
     end
 
-    assert_equal 'mais_registros', @record.inconsistency.kind
-    assert_equal 'pendente', @record.inconsistency.status
+    assert_equal 'above_limit', @record.inconsistency.kind
+    assert_equal 'pending', @record.inconsistency.status
   end
 
   test 'generates an inconsistency for missing records in a work day' do
@@ -57,8 +57,8 @@ class RecordValidatorTest < ActiveSupport::TestCase
       validator.validate!
     end
 
-    assert_equal 'final_semana', @record.inconsistency.kind
-    assert_equal 'pendente', @record.inconsistency.status
+    assert_equal 'weekend', @record.inconsistency.kind
+    assert_equal 'pending', @record.inconsistency.status
   end
 
   test 'generates an inconsistency for any records on holidays' do
@@ -69,7 +69,7 @@ class RecordValidatorTest < ActiveSupport::TestCase
       validator.validate!
     end
 
-    assert_equal 'feriado', @record.inconsistency.kind
-    assert_equal 'pendente', @record.inconsistency.status
+    assert_equal 'holiday', @record.inconsistency.kind
+    assert_equal 'pending', @record.inconsistency.status
   end
 end
