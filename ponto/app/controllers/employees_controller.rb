@@ -17,7 +17,7 @@ class EmployeesController < ApplicationController
       @from = Date.parse(@from) if @from.is_a?(String)
       @to = Date.parse(@to) if @to.is_a?(String)
 
-      @records = @employee.records.between(@from, @to).order(:date, :time)
+      @records = @employee.records.between(@from, @to).order(:date)
     end
   end
 

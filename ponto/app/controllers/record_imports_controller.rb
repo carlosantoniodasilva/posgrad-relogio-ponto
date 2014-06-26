@@ -20,7 +20,7 @@ class RecordImportsController < ApplicationController
 
     if @last_group
       @records = @last_group.records.preload(:employee).
-        joins(:employee).order('employees.name', :date, :time)
+        joins(:employee).order('employees.name', :date)
     end
   end
 

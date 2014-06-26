@@ -15,7 +15,7 @@
         <td><%= link_to record.employee.name, record.employee %></td>
       <% end %>
       <td><%= l record.date %></td>
-      <td><%= l record.time %></td>
+      <td><%= record.times.map { |time| l time }.to_sentence %></td>
     <% end %>
   </tbody>
 </table>

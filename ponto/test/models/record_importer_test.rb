@@ -9,19 +9,19 @@ class RecordImporterTest < ActiveSupport::TestCase
       importer = RecordImporter.new
 
       assert_difference 'RecordGroup.count', 1 do
-        assert_difference 'Record.count', 7 do
+        assert_difference 'Record.count', 2 do
           group = importer.import!
-          assert_equal 7, group.records.size
+          assert_equal 2, group.records.size
 
           record = group.records.first
           assert_equal employees(:fabricio), record.employee
           assert_equal Date.new(2014, 6, 10), record.date
-          assert_equal Time.utc(2000, 1, 1, 8, 5, 23), record.time
+          assert_equal Time.utc(2000, 1, 1, 8, 5, 23), record.times.first
 
           record = group.records.last
           assert_equal employees(:nilson), record.employee
           assert_equal Date.new(2014, 6, 11), record.date
-          assert_equal Time.utc(2000, 1, 1, 17, 5), record.time
+          assert_equal Time.utc(2000, 1, 1, 17, 5), record.times.last
         end
       end
     end

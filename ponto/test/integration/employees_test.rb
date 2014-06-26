@@ -49,8 +49,8 @@ class EmployeesTest < ActionDispatch::IntegrationTest
       assert_content 'Registro Ponto'
       assert_field 'Entre', with: '2014-06-01'
       assert_field 'e', with: '2014-06-12'
-      assert_content '6 registros encontrados entre 01/06/2014 e 12/06/2014.'
-      assert_css '.record', count: 6
+      assert_content '2 registros encontrados entre 01/06/2014 e 12/06/2014.'
+      assert_css '.record', count: 2
 
       fill_in 'Entre', with: '2014-06-12'
       fill_in 'e', with: '2014-06-12'
@@ -58,8 +58,8 @@ class EmployeesTest < ActionDispatch::IntegrationTest
 
       assert_field 'Entre', with: '2014-06-12'
       assert_field 'e', with: '2014-06-12'
-      assert_content '2 registros encontrados entre 12/06/2014 e 12/06/2014.'
-      assert_css '.record', count: 2
+      assert_content '1 registro encontrado entre 12/06/2014 e 12/06/2014.'
+      assert_css '.record', count: 1
 
       fill_in 'Entre', with: '2014-06-25'
       fill_in 'e', with: '2014-06-30'

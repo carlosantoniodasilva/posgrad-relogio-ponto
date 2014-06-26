@@ -41,8 +41,8 @@ class RecordImporter
       transaction do
         group = create_group
 
-        records_to_import.each do |record_data|
-          create_record group, record_data
+        group_record_times(records_to_import) do |employee_id, date, times|
+          create_record group, employee_id, date, times
         end
 
         group
@@ -56,16 +56,34 @@ class RecordImporter
     RecordGroup.create!
   end
 
-  def create_record(group, record_data)
+  def create_record(group, employee_id, date, times)
     group.records.create!(
-      employee: find_employee(record_data['Funcionario']['Id']),
-      date: parse_date(record_data['DataRegistro']),
-      time: record_data['HoraRegistro']
+      employee: find_employee(employee_id),
+      date: parse_date(date),
+      times: times
     )
   end
 
   def find_employee(id)
     @employees[id] ||= Employee.find_by_id(id) || raise(EmployeeNotFound.new(id))
+  end
+
+  def group_record_times(records_to_import)
+    employee_grouped_records = records_to_import.group_by { |records|
+      records['Funcionario']['Id']
+    }
+
+    employee_grouped_records.each do |employee_id, employee_records|
+      grouped_dates = employee_records.group_by { |records|
+        records['DataRegistro']
+      }
+
+      grouped_dates.each do |date, records|
+        times = records.map { |record| record['HoraRegistro'] }
+
+        yield employee_id, date, times
+      end
+    end
   end
 
   def parse_date(date)

@@ -6,5 +6,5 @@ class Record < ActiveRecord::Base
     where('"date" >= :from AND "date" <= :to', from: from, to: to)
   }
 
-  validates :employee_id, :date, :time, presence: true
+  validates :employee_id, :date, :times, presence: true
 end
