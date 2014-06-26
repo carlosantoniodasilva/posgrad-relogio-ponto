@@ -18,6 +18,7 @@ pt-BR:
       employee: Funcionário
       holiday: Feriado
       record: Registro
+      overtime_bank_payment: Pagamento de Horas
       user: Usuário
     attributes:
       department:
@@ -29,6 +30,10 @@ pt-BR:
         user: Usuário
       holiday:
         date: Data
+      overtime_bank_payment:
+        employee_id: Funcionário
+        paid_time: Horas pagas
+        created_at: Criado em
       record:
         employee_id: Funcionário
         date: Data
@@ -38,3 +43,9 @@ pt-BR:
         password: Senha
         password_confirmation: Confirmação de senha
         role: Papel
+    errors:
+      models:
+        overtime_bank_payment:
+          attributes:
+            paid_time:
+              less_than_or_equal_to: 'não pode ser maior que o saldo de %{count} do funcionário'

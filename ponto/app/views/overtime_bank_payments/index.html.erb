@@ -1,0 +1,26 @@
+<% content_for :title, 'Pagamentos de Horas' -%>
+<% content_for :actions do -%>
+  <%= icon_link_to 'plus-sign', 'Novo Pagamento de Horas', new_overtime_bank_payment_path, class: 'btn btn-default' %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= human_name OvertimeBankPayment, :employee_id %></th>
+      <th><%= human_name OvertimeBankPayment, :paid_time %></th>
+      <th><%= human_name OvertimeBankPayment, :created_at %></th>
+      <th class="table-actions"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= content_tag_for :tr, @overtime_bank_payments do |overtime_bank_payment| %>
+      <td><%= link_to overtime_bank_payment.employee.name, overtime_bank_payment.employee %></td>
+      <td><%= display_balance overtime_bank_payment.paid_time %></td>
+      <td><%= l overtime_bank_payment.created_at, format: :short %></td>
+      <td class="table-actions">
+        <%= link_to icon_tag('trash'), overtime_bank_payment, title: 'Remover', method: :delete, data: { confirm: 'Tem certeza?' } %>
+      </td>
+    <% end %>
+  </tbody>
+</table>

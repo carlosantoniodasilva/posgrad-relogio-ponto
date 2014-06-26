@@ -1,0 +1,6 @@
+<% content_for :title, 'Novo Pagamento de Horas' -%>
+<% content_for :actions do -%>
+  <%= icon_button_to 'chevron-left', 'Voltar', overtime_bank_payments_path %>
+<% end %>
+
+<%= render 'form' %>

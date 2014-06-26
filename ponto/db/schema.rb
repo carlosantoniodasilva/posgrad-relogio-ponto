@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140625112253) do
+ActiveRecord::Schema.define(version: 20140625224449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 20140625112253) do
   end
 
   add_index "holidays", ["date"], name: "index_holidays_on_date", unique: true, using: :btree
+
+  create_table "overtime_bank_payments", force: true do |t|
+    t.integer  "employee_id", null: false
+    t.decimal  "paid_time",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "overtime_bank_payments", ["employee_id"], name: "index_overtime_bank_payments_on_employee_id", using: :btree
 
   create_table "record_groups", force: true do |t|
     t.datetime "created_at"
@@ -76,6 +85,8 @@ ActiveRecord::Schema.define(version: 20140625112253) do
   add_foreign_key "departments", "employees", name: "departments_leader_id_fk", column: "leader_id"
 
   add_foreign_key "employees", "departments", name: "employees_department_id_fk"
+
+  add_foreign_key "overtime_bank_payments", "employees", name: "overtime_bank_payments_employee_id_fk", dependent: :delete
 
   add_foreign_key "records", "employees", name: "records_employee_id_fk", dependent: :delete
   add_foreign_key "records", "record_groups", name: "records_group_id_fk", column: "group_id", dependent: :delete

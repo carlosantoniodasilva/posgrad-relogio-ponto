@@ -1,0 +1,17 @@
+<%= form_for(@overtime_bank_payment) do |f| %>
+  <%= render 'shared/form_errors', object: @overtime_bank_payment %>
+
+  <div class="form-group">
+    <%= f.label :employee_id %>
+    <%= f.collection_select :employee_id, Employee.order(:name), :id, :name,
+      { prompt: true }, class: 'form-control', autofocus: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :paid_time %>
+    <%= f.number_field :paid_time, class: 'form-control', min: 0, step: 'any' %>
+    <span class="help-block">Formato numérico: 1h30 = 1.5, 10h15 = 10.25, 25h = 25.</span>
+  </div>
+
+  <%= f.submit class: 'btn btn-primary', data: { disable_with: 'Enviando...' } %>
+  <%= link_to 'Cancelar', employees_path, class: 'btn btn-default' %>
+<% end %>
