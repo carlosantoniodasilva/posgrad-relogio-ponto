@@ -4,7 +4,7 @@ class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
   def index
-    @employees = employees_scope.includes(:department, :user)
+    @employees = employees_scope.includes(:department, :user).order(:name)
   end
 
   def show
