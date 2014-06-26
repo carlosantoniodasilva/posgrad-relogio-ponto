@@ -6,7 +6,7 @@ class OvertimeBankPaymentsController < ApplicationController
   end
 
   def new
-    @overtime_bank_payment = OvertimeBankPayment.new
+    @overtime_bank_payment = OvertimeBankPayment.new(employee_id: params[:id])
   end
 
   def create

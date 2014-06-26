@@ -3,6 +3,7 @@
 <% content_for :actions do -%>
   <div class="btn-group">
     <% unless current_user.leader? %>
+      <%= icon_button_to 'usd', 'Pagar Horas', new_overtime_bank_payment_path(id: @employee.id) %>
       <%= icon_button_to 'pencil', 'Editar', edit_employee_path(@employee) %>
       <%= icon_button_to 'trash', 'Remover', @employee, method: :delete, data: { confirm: 'Tem certeza?' } %>
     <% end %>
