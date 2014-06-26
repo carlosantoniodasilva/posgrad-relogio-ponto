@@ -37,6 +37,10 @@ class RecordImporterTest < ActiveSupport::TestCase
     end
   end
 
+  test 'generates inconsistencies after importing' do
+    skip 'TODO'
+  end
+
   test 'raises when there is an invalid employee' do
     records = test_records.first(3)
     records.last['Funcionario']['Id'] = 99

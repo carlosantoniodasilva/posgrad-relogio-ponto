@@ -58,6 +58,17 @@ ActiveRecord::Schema.define(version: 20140626115923) do
     t.datetime "updated_at"
   end
 
+  create_table "record_inconsistencies", force: true do |t|
+    t.integer  "record_id",  null: false
+    t.string   "kind",       null: false
+    t.string   "status",     null: false
+    t.string   "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "record_inconsistencies", ["record_id"], name: "index_record_inconsistencies_on_record_id", using: :btree
+
   create_table "records", force: true do |t|
     t.integer  "employee_id",              null: false
     t.date     "date",                     null: false
@@ -87,6 +98,8 @@ ActiveRecord::Schema.define(version: 20140626115923) do
   add_foreign_key "employees", "departments", name: "employees_department_id_fk"
 
   add_foreign_key "overtime_bank_payments", "employees", name: "overtime_bank_payments_employee_id_fk", dependent: :delete
+
+  add_foreign_key "record_inconsistencies", "records", name: "record_inconsistencies_record_id_fk", dependent: :delete
 
   add_foreign_key "records", "employees", name: "records_employee_id_fk", dependent: :delete
   add_foreign_key "records", "record_groups", name: "records_group_id_fk", column: "group_id", dependent: :delete

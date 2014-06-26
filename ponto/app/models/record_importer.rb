@@ -39,13 +39,10 @@ class RecordImporter
 
     if records_to_import.any?
       transaction do
-        group = create_group
-
-        group_record_times(records_to_import) do |employee_id, date, times|
-          create_record group, employee_id, date, times
+        create_group.tap do |group|
+          import_records group, records_to_import
+          validate_inconsistencies group
         end
-
-        group
       end
     end
   end
@@ -84,6 +81,16 @@ class RecordImporter
         yield employee_id, date, times
       end
     end
+  end
+
+  def import_records(group, records_to_import)
+    group_record_times(records_to_import) do |employee_id, date, times|
+      create_record group, employee_id, date, times
+    end
+  end
+
+  def validate_inconsistencies(group)
+    RecordValidator.new(group.records).validate!
   end
 
   def parse_date(date)
