@@ -5,7 +5,10 @@
         <th><%= human_name Record, :employee_id %></th>
       <% end %>
       <th><%= human_name Record, :date %></th>
-      <th><%= human_name Record, :time %></th>
+      <th><%= human_name Record, :times %></th>
+      <th><%= human_name RecordInconsistency, :kind %></th>
+      <th><%= human_name RecordInconsistency, :notes %></th>
+      <th class="table-actions"></th>
     </tr>
   </thead>
 
@@ -15,7 +18,55 @@
         <td><%= link_to record.employee.name, record.employee %></td>
       <% end %>
       <td><%= l record.date %></td>
-      <td><%= record.times.map { |time| l time }.to_sentence %></td>
+      <td><%= display_record_times record.times %></td>
+      <% if inconsistency = record.inconsistency -%>
+        <td><%= inconsistency_kind inconsistency %></td>
+        <td><%= inconsistency.notes %></td>
+        <td class="table-actions">
+          <% if inconsistency.pending? %>
+            <%= link_to inconsistency_status_icon_tooltip(inconsistency), '#', title: 'Justificar inconsistência',
+              data: { toggle: 'modal', target: '#' << dom_id(inconsistency) } %>
+
+            <div class="modal fade" id="<%= dom_id(inconsistency) %>">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <%= form_for inconsistency, url: employee_record_inconsistency_path(record.employee, inconsistency) do |f| %>
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span>
+                      </button>
+                      <h4 class="modal-title">Justificar inconsistência: <%= inconsistency_kind(inconsistency) %></h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Funcionário: <strong><%= display_id_name(record.employee) %></strong></p>
+                      <p>
+                        Em <strong><%= l record.date %></strong> nos períodos
+                        <strong><%= display_record_times record.times %></strong>
+                      </p>
+                      <hr>
+                      <div class="form-group">
+                        <%= f.label :notes %>
+                        <%= f.text_area :notes, class: 'form-control', required: true %>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                      <%= f.button inconsistency_status_icon(:verified) << ' Verificar sem abonar horas',
+                        name: 'verify', class: 'btn btn-warning', data: { disable_with: 'Enviando...' } %>
+                      <%= f.button inconsistency_status_icon(:granted) << ' Justificar abonando horas',
+                        name: 'grant', class: 'btn btn-primary', data: { disable_with: 'Enviando...' } %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% else %>
+            <%= inconsistency_status_icon_tooltip inconsistency %>
+          <% end %>
+        </td>
+      <% else %>
+        <td colspan="3"></td>
+      <% end %>
     <% end %>
   </tbody>
 </table>

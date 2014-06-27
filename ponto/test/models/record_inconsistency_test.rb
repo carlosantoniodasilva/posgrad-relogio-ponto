@@ -26,4 +26,22 @@ class RecordInconsistencyTest < ActiveSupport::TestCase
     inconsistency.valid?
     assert_empty inconsistency.errors[:status]
   end
+
+  test 'notes must be present when marking as granted/verified' do
+    inconsistency = RecordInconsistency.new(notes: nil)
+    inconsistency.valid?
+    assert_empty inconsistency.errors[:notes]
+
+    inconsistency.status = 'pending'
+    inconsistency.valid?
+    assert_empty inconsistency.errors[:notes]
+
+    inconsistency.status = 'granted'
+    inconsistency.valid?
+    assert_not_empty inconsistency.errors[:notes]
+
+    inconsistency.status = 'verified'
+    inconsistency.valid?
+    assert_not_empty inconsistency.errors[:notes]
+  end
 end

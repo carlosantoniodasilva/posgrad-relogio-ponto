@@ -3,6 +3,7 @@ class Employee < ActiveRecord::Base
   has_many :led_departments, class_name: 'Department',
     foreign_key: :leader_id, inverse_of: :leader
   has_many :records
+  has_many :record_inconsistencies, through: :records, source: :inconsistency
   has_many :overtime_bank_payments
   has_one :user, dependent: :destroy
 

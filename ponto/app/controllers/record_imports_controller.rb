@@ -19,7 +19,7 @@ class RecordImportsController < ApplicationController
     @last_group = RecordGroup.last
 
     if @last_group
-      @records = @last_group.records.preload(:employee).
+      @records = @last_group.records.preload(:employee, :inconsistency).
         joins(:employee).order('employees.name', :date)
     end
   end

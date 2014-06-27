@@ -17,8 +17,9 @@ pt-BR:
       department: Departamento
       employee: Funcionário
       holiday: Feriado
-      record: Registro
       overtime_bank_payment: Pagamento de Horas
+      record: Registro
+      record_inconsistency: Inconsistências de Registro
       user: Usuário
     attributes:
       department:
@@ -37,7 +38,11 @@ pt-BR:
       record:
         employee_id: Funcionário
         date: Data
-        time: Hora
+        times: Horas
+      record_inconsistency:
+        kind: Inconsistência
+        notes: Justificativa
+        status: Status
       user:
         email: Email
         password: Senha
@@ -49,3 +54,16 @@ pt-BR:
           attributes:
             paid_time:
               less_than_or_equal_to: 'não pode ser maior que o saldo de %{count} do funcionário'
+
+  records:
+    inconsistencies:
+      kind:
+        above_limit: Mais registros
+        below_limit: Menos registros
+        holiday: Feriado
+        missing: Falta
+        weekend: Final de semana
+      status:
+        pending: Pendente
+        granted: Abonado
+        verified: Verificado

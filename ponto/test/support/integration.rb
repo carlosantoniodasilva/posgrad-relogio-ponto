@@ -39,12 +39,12 @@ module Support
       assert has_css?('.alert', text: message), "Flash #{message.inspect} does not exist in the page"
     end
 
-    def assert_link(text)
-      assert has_link?(text), "Link #{text} does not exist in the page"
+    def assert_link(text, options = nil)
+      assert has_link?(text, options), "Link #{text}#{" with options #{options.inspect}" if options} does not exist in the page"
     end
 
-    def assert_no_link(text)
-      assert has_no_link?(text), "Link #{text} exists in the page"
+    def assert_no_link(text, options = nil)
+      assert has_no_link?(text, options), "Link #{text}#{" with options #{options.inspect}" if options} exists in the page"
     end
 
     def assert_title(message)

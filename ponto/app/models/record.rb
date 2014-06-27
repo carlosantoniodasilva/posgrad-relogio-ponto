@@ -6,6 +6,9 @@ class Record < ActiveRecord::Base
   scope :between, -> from, to {
     where('"date" >= :from AND "date" <= :to', from: from, to: to)
   }
+  scope :pending_verification, -> {
+    joins(:inconsistency).merge(RecordInconsistency.pending)
+  }
 
   validates :employee_id, :date, :times, presence: true
 end

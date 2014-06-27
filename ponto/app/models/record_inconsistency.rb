@@ -7,4 +7,5 @@ class RecordInconsistency < ActiveRecord::Base
   validates :record_id, presence: true
   validates :kind, presence: true, inclusion: { in: kinds.keys, allow_blank: true }
   validates :status, presence: true, inclusion: { in: statuses.keys, allow_blank: true }
+  validates :notes, presence: { if: :status?, unless: :pending? }
 end

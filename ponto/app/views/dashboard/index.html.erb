@@ -1,2 +1,15 @@
-<% content_for :title, 'Dashboard' -%>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<% content_for :title, 'Inconsistências no Ponto' -%>
+
+<% if @records.present? %>
+  <% @records.group_by(&:employee).each do |employee, records| -%>
+    <div class="page-header">
+      <h2><%= link_to display_id_name(employee), employee %></h2>
+    </div>
+    <%= render 'records/list', records: records, show_employee: false %>
+  <% end %>
+<% else %>
+  <div class="alert alert-info">
+    Nenhuma inconsistência pendente. <%= link_to 'Importe novos registros', new_record_import_path %>
+    para ver as inconsistências geradas aqui.
+  </div>
+<% end %>
