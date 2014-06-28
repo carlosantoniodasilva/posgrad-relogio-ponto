@@ -1,27 +1,35 @@
 require 'test_helper'
+require 'minitest/mock'
 require 'support/record_importer'
 
 class RecordImporterTest < ActiveSupport::TestCase
   include Support::RecordImporter
 
+  class ValidatorStub
+    def validate!; @validated = true; end
+    def validated?; @validated; end
+  end
+
   test 'imports all records and groups them in a single group record' do
-    stub_record_importer_connection test_records do |importer|
+    stub_record_importer_connection test_records do
       importer = RecordImporter.new
 
-      assert_difference 'RecordGroup.count', 1 do
-        assert_difference 'Record.count', 2 do
-          group = importer.import!
-          assert_equal 2, group.records.size
+      RecordValidator.stub :new, ValidatorStub.new do
+        assert_difference 'RecordGroup.count', 1 do
+          assert_difference 'Record.count', 2 do
+            group = importer.import!
+            assert_equal 2, group.records.size
 
-          record = group.records.first
-          assert_equal employees(:fabricio), record.employee
-          assert_equal Date.new(2014, 6, 10), record.date
-          assert_equal Time.utc(2000, 1, 1, 8, 5, 23), record.times.first
+            record = group.records.first
+            assert_equal employees(:fabricio), record.employee
+            assert_equal Date.new(2014, 6, 10), record.date
+            assert_equal Time.utc(2000, 1, 1, 8, 5, 23), record.times.first
 
-          record = group.records.last
-          assert_equal employees(:nilson), record.employee
-          assert_equal Date.new(2014, 6, 11), record.date
-          assert_equal Time.utc(2000, 1, 1, 17, 5), record.times.last
+            record = group.records.last
+            assert_equal employees(:nilson), record.employee
+            assert_equal Date.new(2014, 6, 11), record.date
+            assert_equal Time.utc(2000, 1, 1, 17, 5), record.times.last
+          end
         end
       end
     end
@@ -38,7 +46,15 @@ class RecordImporterTest < ActiveSupport::TestCase
   end
 
   test 'generates inconsistencies after importing' do
-    skip 'TODO'
+    stub_record_importer_connection test_records do
+      validator = ValidatorStub.new
+
+      RecordValidator.stub :new, validator do
+        RecordImporter.new.import!
+      end
+
+      assert validator.validated?
+    end
   end
 
   test 'raises when there is an invalid employee' do

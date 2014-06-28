@@ -22,7 +22,7 @@ class RecordImportsTest < ActionDispatch::IntegrationTest
       click_on 'Atualizar'
 
       assert_flash 'Importação de registros do ponto efetuada com sucesso.'
-      assert_content '2 registros foram importados na última atualização'
+      assert_content '8 registros foram importados na última atualização'
       assert_content 'Fabricio 10/06/2014 08:05:23'
       assert_content 'Nilson 11/06/2014 17:05:00'
       assert_no_content 'Nenhuma atualização'

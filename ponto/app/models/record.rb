@@ -10,5 +10,5 @@ class Record < ActiveRecord::Base
     joins(:inconsistency).merge(RecordInconsistency.pending)
   }
 
-  validates :employee_id, :date, :times, presence: true
+  validates :employee_id, :date, presence: true
 end

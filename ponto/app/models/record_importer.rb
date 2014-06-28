@@ -90,7 +90,7 @@ class RecordImporter
   end
 
   def validate_inconsistencies(group)
-    RecordValidator.new(group.records).validate!
+    RecordValidator.new(group).validate!
   end
 
   def parse_date(date)
