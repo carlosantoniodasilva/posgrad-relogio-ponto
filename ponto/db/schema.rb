@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626124304) do
+ActiveRecord::Schema.define(version: 20140628025654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,12 +68,13 @@ ActiveRecord::Schema.define(version: 20140626124304) do
   add_index "record_inconsistencies", ["record_id"], name: "index_record_inconsistencies_on_record_id", using: :btree
 
   create_table "records", force: true do |t|
-    t.integer  "employee_id",              null: false
-    t.date     "date",                     null: false
+    t.integer  "employee_id",                 null: false
+    t.date     "date",                        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "group_id",                 null: false
-    t.time     "times",       default: [], null: false, array: true
+    t.integer  "group_id",                    null: false
+    t.time     "times",         default: [],  null: false, array: true
+    t.decimal  "overtime_bank", default: 0.0, null: false
   end
 
   add_index "records", ["employee_id"], name: "index_records_on_employee_id", using: :btree

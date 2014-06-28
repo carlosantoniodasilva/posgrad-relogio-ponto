@@ -6,6 +6,7 @@
       <% end %>
       <th><%= human_name Record, :date %></th>
       <th><%= human_name Record, :times %></th>
+      <th><%= human_name Record, :overtime_bank %></th>
       <th><%= human_name RecordInconsistency, :kind %></th>
       <th><%= human_name RecordInconsistency, :notes %></th>
       <th class="table-actions"></th>
@@ -19,6 +20,7 @@
       <% end %>
       <td><%= l record.date %></td>
       <td><%= display_record_times record.times %></td>
+      <td><%= display_balance record.overtime_bank %></td>
       <% if inconsistency = record.inconsistency -%>
         <td><%= inconsistency_kind inconsistency %></td>
         <td><%= inconsistency.notes %></td>

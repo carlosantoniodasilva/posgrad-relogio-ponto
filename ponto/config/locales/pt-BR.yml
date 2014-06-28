@@ -38,7 +38,8 @@ pt-BR:
       record:
         employee_id: Funcionário
         date: Data
-        times: Horas
+        times: Registros
+        overtime_bank: Banco
       record_inconsistency:
         kind: Inconsistência
         notes: Justificativa
