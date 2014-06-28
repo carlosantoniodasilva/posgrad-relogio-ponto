@@ -94,7 +94,7 @@ class RecordImporter
   end
 
   def parse_date(date)
-    Date.strptime(date, '%m/%d/%Y')
+    Date.strptime(date, '%d/%m/%Y')
   end
 
   def transaction
