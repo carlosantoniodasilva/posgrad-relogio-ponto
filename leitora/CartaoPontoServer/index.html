@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Carto Ponto Server</title>
+</head>
+<body>
+
+    <div>
+        <h2>Todos Registros do Cartão Ponto</h2>
+        <ul id="registrohora" />
+    </div>
+    <div>
+        <h2>Buscar por ID</h2>
+        <input type="text" id="registroPontoId" size="5" />
+        <input type="button" value="Search" onclick="find();" />
+        <p id="product" />
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+    var uri = 'api/registrohora';
+
+    $(document).ready(function () {
+      // Send an AJAX request
+      $.getJSON(uri)
+          .done(function (data) {
+            // On success, 'data' contains a list of products.
+            $.each(data, function (key, item) {
+              // Add a list item for the product.
+              $('<li>', { text: formatItem(item) }).appendTo($('#registrohora'));
+            });
+          });
+    });
+
+    function formatItem(item) {
+        return item.Id + ' - ' + item.DataRegistro + ' : ' + item.HoraRegistro + ' Funcionario: ' + item.Funcionario.Id + ' - ' + item.Funcionario.Nome;
+    }
+
+    function find() {
+        var id = $('#registroPontoId').val();
+      $.getJSON(uri + '/' + id)
+          .done(function (data) {
+            $('#registrohora').text(formatItem(data));
+          })
+          .fail(function (jqXHR, textStatus, err) {
+            $('#registrohora').text('Error: ' + err);
+          });
+    }
+    </script>
+</body>
+</html>

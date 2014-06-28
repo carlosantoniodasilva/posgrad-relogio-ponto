@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartaoPontoServer", "CartaoPontoServer\CartaoPontoServer.csproj", "{E983BE04-B242-4DCB-ACFD-728495DC35FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{D50D7094-C9EB-49BF-B5B8-381E2C7127F0}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{C4FA904B-C708-4493-8D22-875660C858D3}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\CartaoPontoServer-WAWS-dev.json = PublishScripts\Configurations\CartaoPontoServer-WAWS-dev.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{27F202F2-1968-4312-BE6D-ED31057BFD19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartaoPontoServer.Tests", "Tests\CartaoPontoServer.Tests\CartaoPontoServer.Tests.csproj", "{701B3424-921C-4CFD-820B-16D5050F03DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E983BE04-B242-4DCB-ACFD-728495DC35FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E983BE04-B242-4DCB-ACFD-728495DC35FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E983BE04-B242-4DCB-ACFD-728495DC35FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E983BE04-B242-4DCB-ACFD-728495DC35FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{701B3424-921C-4CFD-820B-16D5050F03DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{701B3424-921C-4CFD-820B-16D5050F03DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{701B3424-921C-4CFD-820B-16D5050F03DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{701B3424-921C-4CFD-820B-16D5050F03DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C4FA904B-C708-4493-8D22-875660C858D3} = {D50D7094-C9EB-49BF-B5B8-381E2C7127F0}
+		{701B3424-921C-4CFD-820B-16D5050F03DF} = {27F202F2-1968-4312-BE6D-ED31057BFD19}
+	EndGlobalSection
+EndGlobal
