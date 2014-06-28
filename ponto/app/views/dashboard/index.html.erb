@@ -3,7 +3,10 @@
 <% if @records.present? %>
   <% @records.group_by(&:employee).each do |employee, records| -%>
     <div class="page-header">
-      <h2><%= link_to display_id_name(employee), employee %></h2>
+      <h2>
+        <%= link_to display_id_name(employee), employee %>
+        <small><%= link_to display_id_name(employee.department), employee.department %></small>
+      </h2>
     </div>
     <%= render 'records/list', records: records, show_employee: false %>
   <% end %>
