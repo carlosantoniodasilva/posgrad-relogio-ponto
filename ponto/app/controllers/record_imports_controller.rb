@@ -31,6 +31,7 @@ class RecordImportsController < ApplicationController
       redirect_to new_record_import_path, notice: 'Importação de registros do ponto efetuada com sucesso.'
     else
       flash.now[:alert] = 'Nenhum registro encontrado no relógio ponto.'
+      new
       render :new
     end
   end
