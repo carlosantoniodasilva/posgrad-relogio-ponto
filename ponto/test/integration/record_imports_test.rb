@@ -36,7 +36,7 @@ class RecordImportsTest < ActionDispatch::IntegrationTest
       click_on 'Atualizar'
 
       assert_flash 'Nenhum registro encontrado no relógio ponto.'
-      assert_current_path record_import_path
+      assert_current_path new_record_import_path
     end
   end
 
